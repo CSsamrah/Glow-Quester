@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Antic+Didone&display=swap');
+* {
+  margin: 0;
+}
+h1,h2,h3,h4,h5,h6{
+  /* color:rgb(245, 44, 128); */
+  font-family:serif ;
+  color: black;
+  
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:  sans-serif;
+  overflow-x: hidden;
+}
+
+ .video-background-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  z-index: -1; 
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+
+.overlay h1 {
+  font-size: 3rem;
+}
+
+.mainbutton {
+  padding: 10px 30px;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  border: #562b15;
+  background-color:rgb(144, 35, 131);
+  color: white;
+  cursor: pointer;
+}
+
+
+.MuiAppBar-root {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10; 
+} 
+
+.specialSection {
+  text-align: center;
+  background-color: rgb(250, 240, 240);
+  color: white;
+  height: 80vh;
+}
+.specialSection span{
+  color:#da48c4;
+  font-style: italic;
+}
+
+.specialSection h2 {
+  font-family:serif;
+  font-size: 2.3em;
+  padding: 1.3em;
+  font-weight: 900;
+}
+
+.specialItem img {
+  border-radius: 100px 100px 10px 10px;
+}
+
+.specialItem {
+  border: 10px solid #ddabcf;
+  border-radius: 100px 100px 10px 10px;
+  background-color: #c1449d;
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: 600;
+  width: 150px;
+  padding-bottom: 1em;
+
+}
+
+.specialComponent {
+  display: flex;
+  flex-direction: row;
+  gap: 5em;
+  align-items: center;
+  justify-content: center;
+}
+
+.descriptionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
+  gap: 10px;
+  padding: 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color:rgb(250, 240, 240) ;
+}
+
+.text-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background-color: #dcb5d1;
+  font-family: serif;
+  font-weight: 500;
+  color: black;
+  /* font-style: italic; */
+  font-size: 1.3em;
+
+
+}
+
+.image-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+.image-section {
+  height: 300px;
+}
+
+.topPicks {
+  background-color: rgb(250, 240, 240);
+  color: #8F5D46;
+  text-align: center;
+  line-height: 50px;
+  font-size: 1.5em;
+  padding-top: 2em;
+}
+
+.top_items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
+  gap: 70px 40px;
+  padding: 20px;
+}
+
+.top_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.top_image {
+  margin-top: 1em;
+  height: 300px;
+}
+
+
+.services-container {
+  text-align: center;
+  padding: 20px 10px;
+  background-color: rgb(250, 240, 240);
+}
+
+.services-container h2,
+.services-container h1 {
+  margin: 2em;
+  font-size: 2em;
+}
+
+.services {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.service {
+  background-color: #ddabcf;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 5px;
+  width: 350px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 5px;
+
+}
+
+.service h3 {
+  color: black;
+  margin-bottom: 10px;
+  font-size: 1.4em;
+}
+
+.service p {
+  color: black;
+  font-size: 1em;
+}
+
+.service img {
+  width: 80px;
+  height: 80px;
+  /* margin: 0 auto; */
+}
+
+.achievements {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #562b15;
+  font-size: 1em;
+  font-weight: 700;
+  padding-bottom: 5em;
+}
+
+.achievements span {
+  color: #9b348c;
+  margin: 0.5em 0em;
+  font-size: 1.5em;
+}
+
+.achievement-container {
+  display: flex;
+  gap: 30px;
+}
+
+.full {
+  display: flex;
+  flex-direction: row;
+  gap: 3vw;
+  font-family: sans-serif;
+  font-weight: 700;
+  padding: 3em 0;
+  color:black;
+  max-width: 100%;
+  font-size: 1.3em;
+}
+
+.foot-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 0.7em;
+  align-items: center;
+}
+.foot,.information-foot,.help-foot,.contact-foot{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  text-align: left;
+  flex: auto;
+}
+.foot h2{
+  padding: 0em 1.2em;
+}
+.icons{
+  display: flex;
+  gap: 1em;
+  padding: 1em 2em ;
+
+}
+.end{
+  background-color: #ddabcf;
+  padding: 3em 0em;
+}
