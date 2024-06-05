@@ -91,12 +91,12 @@ function addCartClicked(event) {
     var button = event.target;
     // var shopProducts = button.parentElement;
     var shopProducts = button.closest('.product_card'); 
-    // var title = shopProducts.querySelector(".product_features p").innerText; 
-    // var price = shopProducts.querySelector(".price b").innerText;
-    // var productImage = shopProducts.querySelector(".browse_image").src; 
-    var title = shopProducts.getElementsByClassName("cart_product_title")[0].innerText;
-    var price = shopProducts.getElementsByClassName("cart_product_price")[0].innerText;
-    var productImage = shopProducts.getElementsByClassName("product_image")[0].src;
+    var title = shopProducts.querySelector(".product_features p").innerText; 
+    var price = shopProducts.querySelector(".price b").innerText;
+    var productImage = shopProducts.querySelector(".browse_image").src; 
+    // var title = shopProducts.getElementsByClassName("cart_product_title")[0].innerText;
+    // var price = shopProducts.getElementsByClassName("cart_product_price")[0].innerText;
+    // var productImage = shopProducts.getElementsByClassName("product_image")[0].src;
     addProductToCart(title, price, productImage);
     updatetotal();
 }
