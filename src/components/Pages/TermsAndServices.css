@@ -1,0 +1,41 @@
+  
+  .image-container {
+    width: 100%;
+  }
+  
+  .full-width-image {
+    width: 100%;
+    display: block;
+  }
+  
+.body {
+    background-color: rgb(216, 195, 168);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Ensures the background color covers the full height of the viewport */
+    box-sizing: border-box;
+  }
+  
+  .body h1, .body h2, .body ol {
+    text-align: left; /* Align headers and lists to the left if desired */
+    margin: 0 auto;
+    max-width: 600px; /* Adjust the max-width as per your design */
+  }
+  
+  .body h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .body h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .body ol {
+    list-style-position: inside;
+    padding-left: 0;
+  }
+  

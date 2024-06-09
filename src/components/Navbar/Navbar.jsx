@@ -1,9 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge, MenuItem, Menu, Box, Drawer, List, ListItem, ListItemText, Collapse, Tabs, Tab } from '@mui/material';
-import { Menu as MenuIcon, Search as SearchIcon, AccountCircle, MoreVert as MoreIcon, ShoppingCart as ShoppingCartIcon, ExpandLess, ExpandMore } from '@mui/icons-material';
+import {
+    AppBar,
+    Toolbar,
+    IconButton,
+    Typography,
+    InputBase,
+    Badge,
+    MenuItem,
+    Menu,
+    Box,
+    Drawer,
+    List,
+    ListItem,
+    ListItemText,
+    Collapse,
+    Tabs,
+    Tab,
+} from '@mui/material';
+import {
+    Menu as MenuIcon,
+    Search as SearchIcon,
+    AccountCircle,
+    MoreVert as MoreIcon,
+    ShoppingCart as ShoppingCartIcon,
+    ExpandLess,
+    ExpandMore,
+} from '@mui/icons-material';
 import { styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
-
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -44,49 +69,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-function samePageLinkNavigation(event) {
-    if (
-        event.defaultPrevented ||
-        event.button !== 0 ||
-        event.metaKey ||
-        event.ctrlKey ||
-        event.altKey ||
-        event.shiftKey
-    ) {
-        return false;
-    }
-    return true;
-}
-
 function LinkTab(props) {
     return (
         <Tab
-            component="a"
-            onClick={(event) => {
-                if (samePageLinkNavigation(event)) {
-                    event.preventDefault();
-                }
-            }}
-            aria-current={props.selected && 'page'}
+            component={Link}
+            to={props.to}
             {...props}
         />
     );
 }
 
 LinkTab.propTypes = {
-    selected: PropTypes.bool,
+    to: PropTypes.string.isRequired,
 };
 
 function NavTabs() {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
-        if (
-            event.type !== 'click' ||
-            (event.type === 'click' && samePageLinkNavigation(event))
-        ) {
-            setValue(newValue);
-        }
+        setValue(newValue);
     };
 
     return (
@@ -96,10 +97,10 @@ function NavTabs() {
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 role="navigation"
-                >
-                <LinkTab label="Home" href="/" sx={{fontWeight:'800',fontFamily:'Inter'}}/>
-                <LinkTab label="Skintest" href="/skintest" sx={{fontWeight:'800',fontFamily:'Inter'}}/>
-                <LinkTab label="Skincare" href="/skincare" sx={{fontWeight:'800',fontFamily:'Inter'}}/>
+            >
+                <LinkTab label="Home" to="/" sx={{ fontWeight: '800', fontFamily: 'Inter' }} />
+                <LinkTab label="Quiz" to="/skintest" sx={{ fontWeight: '800', fontFamily: 'Inter' }} />
+                <LinkTab label="Skincare" to="/skincare" sx={{ fontWeight: '800', fontFamily: 'Inter' }} />
             </Tabs>
         </Box>
     );
@@ -108,22 +109,20 @@ function NavTabs() {
 const theme = createTheme({
     typography: {
         fontFamily: 'serif',
-        
-        // textAlign: 'center'
-      },
+    },
     palette: {
-      primary: {
-        main: '#ffffff',
-        light: '#e0868f',
-        dark: 'ce5f6a',
-        contrastText: '#ffffff'
-      },
-      secondary: {
-        main: '#ed2d93',
-        light: '#f2e0cb',
-        dark: '#f4dbbc',
-        contrastText: '#4f220f',
-      },
+        primary: {
+            main: '#ffffff',
+            light: '#e0868f',
+            dark: 'ce5f6a',
+            contrastText: '#ffffff',
+        },
+        secondary: {
+            main: '#ed2d93',
+            light: '#f2e0cb',
+            dark: '#f4dbbc',
+            contrastText: '#4f220f',
+        },
     },
 });
 
@@ -202,7 +201,7 @@ export default function PrimarySearchAppBar() {
             onClose={handleMobileMenuClose}
         >
             <MenuItem>
-                <IconButton aria-label="cart" >
+                <IconButton aria-label="cart">
                     <Badge badgeContent={4} color="secondary">
                         <ShoppingCartIcon />
                     </Badge>
@@ -229,13 +228,13 @@ export default function PrimarySearchAppBar() {
             anchor="left"
             open={drawerOpen}
             onClose={handleDrawerToggle}
-            sx={{ '& .MuiDrawer-paper': { width: 300 }}} 
+            sx={{ '& .MuiDrawer-paper': { width: 300 } }}
         >
             <List>
-                <ListItem button>
+                <ListItem button component={Link} to="/">
                     <ListItemText primary="Home" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button component={Link} to="/skintest">
                     <ListItemText primary="Skintest" />
                 </ListItem>
                 <ListItem button onClick={handleSkincareClick}>
@@ -278,17 +277,17 @@ export default function PrimarySearchAppBar() {
                             <MenuIcon />
                         </IconButton>
                         <Box sx={{ flexGrow: 1 }}>
-                            <NavTabs/>
+                            <NavTabs />
                         </Box>
-                        <Box sx={{flexGrow:1}}>
-                        <Typography
-                            variant="h4"
-                            noWrap
-                            component="div"
-                            sx={{ display: { xs: 'none', sm: 'block' }, fontWeight:'600',color:'white'}}
-                        >
-                            Glow Quester
-                        </Typography>
+                        <Box sx={{ flexGrow: 1 }}>
+                            <Typography
+                                variant="h4"
+                                noWrap
+                                component="div"
+                                sx={{ display: { xs: 'none', sm: 'block' }, fontWeight: '600', color: 'white' }}
+                            >
+                                Glow Quester
+                            </Typography>
                         </Box>
                         <Search>
                             <SearchIconWrapper>
@@ -300,7 +299,7 @@ export default function PrimarySearchAppBar() {
                             />
                         </Search>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <IconButton aria-label="cart" >
+                            <IconButton aria-label="cart">
                                 <Badge badgeContent={4} color="secondary">
                                     <ShoppingCartIcon />
                                 </Badge>
@@ -338,3 +337,5 @@ export default function PrimarySearchAppBar() {
         </ThemeProvider>
     );
 }
+
+

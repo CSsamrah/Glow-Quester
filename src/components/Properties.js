@@ -1,8 +1,8 @@
 import React from 'react'
-import image1 from '../images/flask.png'
-import image2 from '../images/vegan.png'
-import image3 from '../images/ecofriendly.png'
-import image4 from '../images/bottle.png'
+import image1 from './images/flask.png'
+import image2 from './images/vegan.png'
+import image3 from './images/ecofriendly.png'
+import image4 from './images/bottle.png'
 import './App.css';
 
 export default function Properties() {

@@ -1,6 +1,6 @@
-import React from 'react'
-import video1 from '../images/skincarevideo.mp4'
-import './App.css';
+import React, { useState } from 'react';
+import video1 from '../images/skincarevideo.mp4';
+import '../App.css';
 import Box from '@mui/material/Box';
 
 export default function MainVideo() {

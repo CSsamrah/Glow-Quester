@@ -1,0 +1,50 @@
+/* Centering the content */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ddabcf; /* Background color for the entire page */
+}
+
+/* Container for the quiz content */
+.quiz-container {
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffffff; /* Background color for the quiz box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Button styles */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.option-btn {
+    background-color: #b99076; /* Background color for the options */
+}
+
+.control-btn {
+    background-color: palevioletred; /* Background color for the control buttons (Next, Restart, Home) */
+}
+
+/* Add hover effects */
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Add selected state for options */
+.selected {
+    border: 2px solid #000000; /* Optional: Add a border to indicate selection */
+}
+
+

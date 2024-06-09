@@ -1,12 +1,12 @@
 import React from 'react'
-import serum from '../images/orange serum.png' 
-import pink_drink from '../images/pink drink.png'
-import green_cream from '../images/green cream.png'
-import cleanser from '../images/cleanser.png'
-import cleansing_cream from '../images/cleansing cream.png'
-import kylie from '../images/kylie skin.png'
-import gel_cream from '../images/gel cream.png'
-import vitamin_C from '../images/vitamin c.png'
+import serum from './images/orange serum.png' 
+import pink_drink from './images/pink drink.png'
+import green_cream from './images/green cream.png'
+import cleanser from './images/cleanser.png'
+import cleansing_cream from './images/cleansing cream.png'
+import kylie from './images/kylie skin.png'
+import gel_cream from './images/gel cream.png'
+import vitamin_C from './images/vitamin c.png'
 
 export default function TopPicks() {
   return (
@@ -17,28 +17,28 @@ export default function TopPicks() {
     </div>
     <div className='top_items'>
         <div className='top_image'>
-            <img src={serum}></img>
+            <img src={serum} alt=''></img>
         </div>
         <div className='top_image'>
-            <img src={pink_drink}></img>
+            <img src={pink_drink} alt=''></img>
         </div>
         <div className='top_image'>
-            <img src={green_cream}></img>
+            <img src={green_cream} alt=''></img>
         </div>
         <div className='top_image'>
-            <img src={cleansing_cream}></img>
+            <img src={cleansing_cream} alt=''></img>
         </div>
         <div className='top_image'>
-            <img src={cleanser}></img>
+            <img src={cleanser} alt=''></img>
         </div>
         <div className='top_image'>
-            <img src={gel_cream}></img>
+            <img src={gel_cream} alt=''></img>
         </div>
         <div className='top_image'>
-            <img src={kylie}></img>
+            <img src={kylie} alt=''></img>
         </div>
         <div className='top_image'>
-            <img src={vitamin_C}></img>
+            <img src={vitamin_C} alt=''></img>
         </div>
 
     </div>

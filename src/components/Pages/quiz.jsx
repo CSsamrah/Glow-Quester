@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+import './quiz.css';
+
 const questions = [
     {
         question: "How does your skin feel after cleansing?",
@@ -37,88 +40,7 @@ const questions = [
     },
 ];
 
-const questionElement = document.getElementById("question");
-const answerButtons = document.getElementById("answer-btns");
-const nextButton = document.getElementById("next-btn");
-const restartButton = document.getElementById("restart-btn");
-const homeButton = document.getElementById("home-btn");
-
-let currentQuestionIndex = 0;
-let userAnswers = [];
-
-function startQuiz() {
-    currentQuestionIndex = 0;
-    userAnswers = [];
-    nextButton.innerHTML = "Next";
-    nextButton.style.display = "none";
-    restartButton.style.display = "none";
-    homeButton.style.display = "none"; // Hide home button initially
-    showQuestion();
-}
-
-function showQuestion() {
-    resetState();
-    let currentQuestion = questions[currentQuestionIndex];
-    let questionNo = currentQuestionIndex + 1;
-    questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
-
-    currentQuestion.answers.forEach(answer => {
-        const button = document.createElement("button");
-        button.innerHTML = answer.text;
-        button.classList.add("btn");
-        button.addEventListener("click", () => selectAnswer(button, answer));
-        answerButtons.appendChild(button);
-    });
-}
-
-function resetState() {
-    while (answerButtons.firstChild) {
-        answerButtons.removeChild(answerButtons.firstChild);
-    }
-}
-
-function selectAnswer(button, answer) {
-    userAnswers[currentQuestionIndex] = answer;
-    const buttons = answerButtons.getElementsByClassName("btn");
-    for (let btn of buttons) {
-        btn.classList.remove("selected");
-    }
-    button.classList.add("selected");
-    nextButton.style.display = 'block';
-}
-
-nextButton.addEventListener("click", () => {
-    if (currentQuestionIndex < questions.length - 1) {
-        currentQuestionIndex++;
-        showQuestion();
-    } else {
-        showResults();
-    }
-});
-
-restartButton.addEventListener("click", startQuiz);
-
-function showResults() {
-    resetState();
-    questionElement.innerHTML = "Your Skincare Routine:";
-    const firstThreeResults = determineSkincareRoutine();
-    const pFirstThree = document.createElement("p");
-    pFirstThree.innerHTML = firstThreeResults;
-    pFirstThree.classList.add("result-text");
-    questionElement.appendChild(pFirstThree);
-
-    const lastQuestionResult = determineLastQuestionResult();
-    const pLastQuestion = document.createElement("p");
-    pLastQuestion.innerHTML = lastQuestionResult;
-    pLastQuestion.classList.add("result-text");
-    questionElement.appendChild(pLastQuestion);
-
-    nextButton.style.display = 'none';
-    restartButton.style.display = 'block';
-    homeButton.style.display = 'block'; // Show home button
-}
-
-function determineSkincareRoutine() {
+const determineSkincareRoutine = (userAnswers) => {
     const typeCount = {
         dry: 0,
         oily: 0,
@@ -156,9 +78,9 @@ function determineSkincareRoutine() {
     };
 
     return routine[predominantType];
-}
+};
 
-function determineLastQuestionResult() {
+const determineLastQuestionResult = (userAnswers) => {
     const lastAnswer = userAnswers[userAnswers.length - 1];
 
     if (lastAnswer) {
@@ -177,9 +99,75 @@ function determineLastQuestionResult() {
     } else {
         return "";
     }
+};
+
+function Quiz() {
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [userAnswers, setUserAnswers] = useState([]);
+    const [showResults, setShowResults] = useState(false);
+
+    const handleAnswerClick = (answer) => {
+        const newAnswers = [...userAnswers];
+        newAnswers[currentQuestionIndex] = answer;
+        setUserAnswers(newAnswers);
+    };
+
+    const handleNextClick = () => {
+        if (currentQuestionIndex < questions.length - 1) {
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+        } else {
+            setShowResults(true);
+        }
+    };
+
+    const handleRestartClick = () => {
+        setCurrentQuestionIndex(0);
+        setUserAnswers([]);
+        setShowResults(false);
+    };
+
+    if (showResults) {
+        return (
+            <div className="center-container">
+                <div className="quiz-container">
+                    <h1>Your Skincare Routine:</h1>
+                    <p dangerouslySetInnerHTML={{ __html: determineSkincareRoutine(userAnswers) }}></p>
+                    <p dangerouslySetInnerHTML={{ __html: determineLastQuestionResult(userAnswers) }}></p>
+                    <button className="btn control-btn" onClick={handleRestartClick}>Restart</button>
+                    <button className="btn control-btn" onClick={() => window.location.href = "/"}>Home</button>
+                </div>
+            </div>
+        );
+    }
+
+    const currentQuestion = questions[currentQuestionIndex];
+
+    return (
+        <div className="center-container">
+            <div className="quiz-container">
+                <h1>{currentQuestionIndex + 1}. {currentQuestion.question}</h1>
+                <div className="btn-container">
+                    {currentQuestion.answers.map((answer, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handleAnswerClick(answer)}
+                            className={`btn option-btn ${userAnswers[currentQuestionIndex] === answer ? "selected" : ""}`}
+                        >
+                            {answer.text}
+                        </button>
+                    ))}
+                </div>
+                <button className="btn control-btn" onClick={handleNextClick}>Next</button>
+            </div>
+        </div>
+    );
 }
 
-startQuiz();
+export default Quiz;
+
+
+
+
 
 
 
