@@ -204,7 +204,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     var cartItemsContainer1 = document.querySelector(".cart_info");
-    var cartItemsContainer2 = document.querySelector(".sub_total");
+    // var cartItemsContainer2 = document.querySelector(".sub_total");
 
     cartItems.forEach(item => {
         var cartShopBox1 = document.createElement("div");
@@ -284,6 +284,15 @@ function removeCartItem(event) {
 
     cartItem.remove();
     updatetotal();
+
+    // Trigger a custom event manually
+    var storageEvent = new CustomEvent('cartUpdated', { detail: cartItems });
+    window.dispatchEvent(storageEvent);
+
+    // var storageEvent = new Event('storage');
+    // storageEvent.key = 'cartItems';
+    // storageEvent.newValue = JSON.stringify(cartItems);
+    // window.dispatchEvent(storageEvent);
 }
 
 function quantityChanged(event) {
@@ -357,5 +366,43 @@ function addProductToCart(title, price, productImage) {
     cartShopBox1.querySelector(".cart_product_quantity").addEventListener('change', quantityChanged);
 }
 
+function renderCart() {
+    var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    var cartItemsContainer1 = document.querySelector(".cart_info");
+    var cartItemsContainer2 = document.querySelector(".sub_total");
+
+    cartItemsContainer1.innerHTML = '';
+    cartItemsContainer2.innerHTML = '';
+
+    cartItems.forEach(item => {
+        var cartShopBox1 = document.createElement("div");
+        cartShopBox1.classList.add('cart_box');
+
+        cartShopBox1.innerHTML = `
+            <img class="product_image" src="${item.productImage}" alt="">
+            <div class="detail_box">
+                <div class="cart_product_title">${item.title}</div>
+                <div class="cart_product_price">${item.price}</div>
+                <input type="number" value="${item.quantity}" class="cart_product_quantity">
+                <i class='bx bxs-trash cart_remove'></i>
+            </div>
+            <div class="subtotal">
+                <div class="sub_price">$${(parseFloat(item.price.replace("$", "")) * item.quantity).toFixed(2)}</div>
+            </div>`;
+
+        cartItemsContainer1.append(cartShopBox1);
+    });
+
+    updatetotal();
+    ready();
+}
+//cartItems
+function handleStorageEvent(event) {
+    if (event.type === "cartUpdated") {
+        renderCart();
+    }
+}
+
+window.addEventListener('cartUpdated', handleStorageEvent);
 
 document.addEventListener('DOMContentLoaded', renderCart);
