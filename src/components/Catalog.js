@@ -1,290 +1,148 @@
-// increase size of image when hover
-function handleImageHover(event) {
-    if (event.type === 'mouseover') {
-        event.target.style.transform = 'scale(1.2)';
-    } else if (event.type === 'mouseout') {
-        event.target.style.transform = 'scale(1)';
-    }
-}
+import React, { useState, useEffect } from 'react';
+import './Catalog.css';
+import 'boxicons/css/boxicons.min.css';
 
-const menuImages = document.querySelectorAll('.browse_image');
-        menuImages.forEach(image => {
-            image.addEventListener('mouseover', handleImageHover);
-            image.addEventListener('mouseout', handleImageHover);
-        });
+const Catalog = () => {
+    const [cart, setCart] = useState([]);
+    const [total, setTotal] = useState(0);
 
-// lead to home page on clicking back button
-function redirectToHomePage() {
-    window.location.href = 'link.html';
-}
+    useEffect(() => {
+        const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        setCart(storedCartItems);
+        updateTotal(storedCartItems);
+    }, []);
 
-//for new_tag appearance
-document.addEventListener('DOMContentLoaded', function() {
-    const productFeatures = document.querySelectorAll('.product_features');
-    
-    productFeatures.forEach(function(feature) {
-        if (feature.getAttribute('data-new') === 'true') {
-            feature.classList.toggle('active');
-        }
-    });
-});
+    useEffect(() => {
+        localStorage.setItem("cartItems", JSON.stringify(cart));
+        updateTotal(cart);
+    }, [cart]);
 
-//SHOPPING CART
-
-let cart = document.querySelector(".cart");
-//Open Cart
-function addToCart() {
-    cart.classList.add("active");
-    console.log("added to cart")
-};
-//Close Cart
-function closeCart() {
-    cart.classList.remove("active");
-    console.log("cart closed")
-};
-
-//Updating Cart
-document.addEventListener('DOMContentLoaded', ready);
-
-function ready(){
-    // remove items from cart
-    var removeCartButton = document.getElementsByClassName('cart_remove');
-    // console.log(removeCartButton);
-    for (var i = 0; i< removeCartButton.length; i++) {
-        var button = removeCartButton[i];
-        button.addEventListener('click', removeCartItem);
-    }
-    //change quantity
-    var quantityInputs = document.getElementsByClassName('cart_product_quantity');
-    // console.log(quantityInputs);
-    for (var i = 0; i< quantityInputs.length; i++) {
-        var input = quantityInputs[i];
-        input.addEventListener('change', quantityChanged);
-    }
-    //add to cart
-    var addCart = document.getElementsByClassName('add_to_cart_button');
-    console.log(addCart);
-    for (var i = 0; i < addCart.length; i++) {
-        var button = addCart[i];
-        button.addEventListener('click', addCartClicked);
-    }
-    //view full cart button
-    document.getElementsByClassName('view_cart_btn')[0].addEventListener('click', viewFullCart);
-}
-
-// remove items from cart
-function removeCartItem(event){
-    var buttonClicked = event.target;
-    buttonClicked.parentElement.remove();
-    updatetotal();
-}
-
-//change quantity
-// function quantityChanged(event) {
-//     var input = event.target;
-//     if (isNaN(input.value) || input.value <= 0) {
-//         input.value = 1;
-//     }
-//     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-//     var cartBox = input.closest('.cart_box');
-//     var title = cartBox.querySelector('.cart_product_title').innerText;
-//     var product = cartItems.find(item => item.title === title);
-//     if (product) {
-//         product.quantity = input.value;
-//         localStorage.setItem("cartItems", JSON.stringify(cartItems));
-//     }
-//     updatetotal();
-// }
-
-
-function quantityChanged(event) {
-    var input = event.target;
-    if (isNaN(input.value) || input.value <= 0) {
-        input.value = 1;
-    }
-
-    var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    var cartBox = input.closest('.cart_box');
-    var title = cartBox.querySelector('.cart_product_title').innerText;
-    var product = cartItems.find(item => item.title === title);
-    if (product) {
-        product.quantity = input.value;
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    }
-
-    // Update the quantity in the cart display
-    renderCart(); // Assuming you have a renderCart function in your cart.js to update the cart display
-    updatetotal(); // Also update the total after changing the quantity
-}
-
-
-//add to cart
-// function addCartClicked(event) {
-//     var button = event.target;
-//     var shopProducts = button.closest('.product_card'); 
-//     var title = shopProducts.querySelector(".product_features p").innerText; 
-//     var price = shopProducts.querySelector(".price b").innerText;
-//     var productImage = shopProducts.querySelector(".browse_image").src; 
-//     // var shopProducts = button.parentElement;
-//     // var title = shopProducts.getElementsByClassName("cart_product_title")[0].innerText;
-//     // var price = shopProducts.getElementsByClassName("cart_product_price")[0].innerText;
-//     // var productImage = shopProducts.getElementsByClassName("product_image")[0].src;
-//     addProductToCart(title, price, productImage);
-//     updatetotal();
-// }
-
-// // function addProductToCart(title, price, productImage) {
-// //     var cartBoxContent = `
-// //     <img class="product_image" src="${productImage}" alt="">
-// //     <div class="detail_box">
-// //         <div class="cart_product_title">${title}</div>
-// //         <div class="cart_product_price">${price}</div> 
-// //         <input type="number" value="1" class="cart_product_quantity">
-// //     </div>
-// //     <i class='bx bxs-trash cart_remove'></i>`;
-// //     var cartItems = document.getElementsByClassName("cart_content")[0];
-// //     var cartItemsTitles = cartItems.getElementsByClassName("cart_product_title");
-    
-// //     // Check if the product is already in the cart
-// //     for (var i = 0; i < cartItemsTitles.length; i++) {
-// //         if (cartItemsTitles[i].innerText.trim() === title.trim()) {
-// //             alert("You have already added this item to your cart");
-// //             return; // Exit the function if the product is already in the cart
-// //         }
-// //     }
-    
-// //     // If the product is not already in the cart, add it
-// //     var cartShopBox = document.createElement("div");
-// //     cartShopBox.classList.add('cart_box');
-    
-// //     cartShopBox.innerHTML = cartBoxContent;
-// //     cartItems.append(cartShopBox);
-    
-// //     cartShopBox.getElementsByClassName("cart_remove")[0].addEventListener('click', removeCartItem);
-// //     cartShopBox.getElementsByClassName("cart_product_quantity")[0].addEventListener('change', quantityChanged);
-// // }
-
-// function addProductToCart(title, price, productImage) {
-//     var cartBoxContent = `
-//                 <img class="product_image" src="${productImage}" alt="">
-//                 <div class="detail_box">
-//                     <div class="cart_product_title">${title}</div>
-//                     <div class="cart_product_price">${price}</div> 
-//                     <input type="number" value="1" class="cart_product_quantity">
-//                 </div>
-//                 <i class='bx bxs-trash cart_remove'></i>`
-//     var cartItems = document.getElementsByClassName("cart_content")[0];
-//     var cartItemsNames = cartItems.getElementsByClassName("cart_product_title");
-//     var carttitle = document.getElementsByClassName("cart_product_title");
-//     console.log(carttitle);
-//     console.log(cartItemsNames)
-//     for (var i = 0; i < carttitle.length; i++) {
-//         for (var j = 0; j < cartItemsNames.length; j++){
-//         if (cartItemsNames[i].innerText == carttitle[i].innerText) {
-//             console.log(title);
-//         alert("You have already added this item to your cart");
-//         return;
-//     }
-// }
-//     }
-// var cartShopBox = document.createElement("div");
-// cartShopBox.classList.add('cart_box');
-
-// cartShopBox.innerHTML = cartBoxContent;
-// cartItems.append(cartShopBox);
-// cartShopBox.getElementsByClassName("cart_remove")[0].addEventListener('click', removeCartItem);
-// cartShopBox.getElementsByClassName("cart_product_quantity")[0].addEventListener('change', quantityChanged);
-// }
-
-function addCartClicked(event) {
-    var button = event.target;
-    var shopProducts = button.closest('.product_card'); 
-    var title = shopProducts.querySelector(".product_features p").innerText; 
-    var price = shopProducts.querySelector(".price b").innerText;
-    var productImage = shopProducts.querySelector(".browse_image").src; 
-    var quantity = 1; // Default quantity
-    addProductToCart(title, price, productImage, quantity);
-    updatetotal();
-}
-
-function addProductToCart(title, price, productImage, quantity) {
-    var cartBoxContent = {
-        title: title,
-        price: price,
-        productImage: productImage,
-        quantity: quantity
+    const handleImageHover = (event, isHovering) => {
+        event.target.style.transform = isHovering ? 'scale(1.2)' : 'scale(1)';
     };
 
-    var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    
-    // Check if the product is already in the cart
-    var productExists = cartItems.find(item => item.title === title);
-    if (productExists) {
-        alert("You have already added this item to your cart");
-        return;
-    }
+    const redirectToHomePage = () => {
+        window.location.href = 'link.html';
+    };
 
-    cartItems.push(cartBoxContent);
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    renderCart();
-}
-
-function renderCart() {
-    var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    var cartItemsContainer = document.querySelector(".cart_content");
-    cartItemsContainer.innerHTML = '';
-
-    cartItems.forEach(item => {
-        var cartShopBox = document.createElement("div");
-        cartShopBox.classList.add('cart_box');
-
-        cartShopBox.innerHTML = `
-            <img class="product_image" src="${item.productImage}" alt="">
-            <div class="detail_box">
-                <div class="cart_product_title">${item.title}</div>
-                <div class="cart_product_price">${item.price}</div>
-                <input type="number" value="${item.quantity}" class="cart_product_quantity">
-            </div>
-            <i class='bx bxs-trash cart_remove'></i>`;
-
-        cartItemsContainer.append(cartShopBox);
-        cartShopBox.querySelector(".cart_remove").addEventListener('click', removeCartItem);
-        cartShopBox.querySelector(".cart_product_quantity").addEventListener('change', quantityChanged);
-    });
-
-    updatetotal();
-}
-
-//view Full Cart
-function viewFullCart() {
-    alert("You are viewing detailed cart");
-    var cartContent = document.getElementsByClassName("cart_content")[0];
-    while (cartContent.hasChildNodes()) {
-        cartContent.removeChild(cartContent.firstChild);
-    }
-    updatetotal();
-    renderCart();
-    window.location.href = 'Cart1.html';
-}
-
-// update total
-function updatetotal() {
-    var cartContent = document.getElementsByClassName("cart_content")[0];
-    var cartBoxes = cartContent.getElementsByClassName("cart_box");
-    var total = 0;
-    for (var i = 0; i < cartBoxes.length; i++) {
-        var cartBox = cartBoxes[i];
-        var priceElement = cartBox.getElementsByClassName("cart_product_price")[0];
-        var quantityElement = cartBox.getElementsByClassName("cart_product_quantity")[0];
-        if (priceElement && quantityElement) {
-            var price = parseFloat(priceElement.innerText.replace("$", ""));
-            var quantity = quantityElement.value;
-            console.log(price, quantity);
-            total = total + (price * quantity);
+    const addToCart = (title, price, productImage) => {
+        const productExists = cart.find(item => item.title === title);
+        if (productExists) {
+            alert("You have already added this item to your cart");
+            return;
         }
-    }
-    total = Math.round(total * 100) / 100;
-    document.getElementsByClassName("total_price")[0].innerText = "$" + total.toFixed(2);
-}
+        const newCart = [...cart, { title, price, productImage, quantity: 1 }];
+        setCart(newCart);
+    };
 
-document.addEventListener('DOMContentLoaded', renderCart);
+    const removeCartItem = (title) => {
+        const newCart = cart.filter(item => item.title !== title);
+        setCart(newCart);
+    };
+
+    const quantityChanged = (title, quantity) => {
+        const newCart = cart.map(item =>
+            item.title === title ? { ...item, quantity: quantity > 0 ? quantity : 1 } : item
+        );
+        setCart(newCart);
+    };
+
+    const updateTotal = (cartItems) => {
+        const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        setTotal(total);
+    };
+
+    const renderCart = () => {
+        return cart.map(item => (
+            <div className="cart_box" key={item.title}>
+                <img className="product_image" src={item.productImage} alt={item.title} />
+                <div className="detail_box">
+                    <div className="cart_product_title">{item.title}</div>
+                    <div className="cart_product_price">${item.price}</div>
+                    <input
+                        type="number"
+                        value={item.quantity}
+                        className="cart_product_quantity"
+                        onChange={(e) => quantityChanged(item.title, parseInt(e.target.value))}
+                    />
+                </div>
+                <i className='bx bxs-trash cart_remove' onClick={() => removeCartItem(item.title)}></i>
+            </div>
+        ));
+    };
+
+    return (
+        <main>
+            <div className="container">
+                <div className="navbar2">
+                    <div className="navbar_images">
+                        <button className="image_button" onClick={() => alert('Button clicked!')}>
+                            <img src="../images/filter.png" alt="Click Me" />
+                        </button>
+                        <button className="image_button" onClick={() => alert('Button clicked!')}>
+                            <img src="../images/view1.png" alt="Click Me" />
+                        </button>
+                    </div>
+                </div>
+                <div className="searched_no">
+                    <button className="back_button_img" onClick={redirectToHomePage}>
+                        <img src="../images/back.png" alt="back" />
+                    </button>
+                    <button className="back_button_text" onClick={redirectToHomePage}>
+                        <span>49</span> &nbsp; Results Found
+                    </button>
+                </div>
+                <div className="catalog">
+                    <div id="Menu" className="Menu">
+                        {['Summer Time Exfoliator', 'Summer Time Cream', 'Summer Time Cleanser', 'Summer Time Night Cream', 'Summer Time Serum', 'Summer Time Toner', 'Summer Time Essence'].map((product, index) => (
+                            <div className="product_card" key={index}>
+                                <a href="../ProductDetail/index2.html">
+                                    <div className="product_features">
+                                        <img className="new_tag" src="../images/New.png" alt="new_item" />
+                                        <img
+                                            className="browse_image"
+                                            src={`../images/${index + 1}.png`}
+                                            alt=""
+                                            onMouseOver={(e) => handleImageHover(e, true)}
+                                            onMouseOut={(e) => handleImageHover(e, false)}
+                                        />
+                                        <p style={{ fontSize: '20px' }}>{product}</p>
+                                        <div className="price">
+                                            <del>$7.00</del>
+                                            <span><b>${(6.50 - (index * 0.50)).toFixed(2)}</b></span>
+                                        </div>
+                                        <p><span style={{ fontWeight: 'bold' }}>500</span> reviews</p>
+                                        <p><span style={{ fontWeight: 'bold' }}>12K</span> sold</p>
+                                        <img className="free_delivery" src="../images/Free Delivery.png" alt="free_delivery_status" />
+                                    </div>
+                                </a>
+                                <div className="add_to_cart">
+                                    <button
+                                        className="add_to_cart_button"
+                                        onClick={() => addToCart(product, (6.50 - (index * 0.50)).toFixed(2), `../images/${index + 1}.png`)}
+                                    >
+                                        <img src="../images/AddToCart.png" alt="Click Me" />
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="cart">
+                    <h2>Your Cart</h2>
+                    <div className="cart_content">
+                        {renderCart()}
+                    </div>
+                    <div className="total">
+                        <div className="total_title">Total</div>
+                        <div className="total_price">${total.toFixed(2)}</div>
+                    </div>
+                    <button type="button" className="view_cart_btn" onClick={() => window.location.href = 'Cart1.html'}>View Cart</button>
+                    <i className='bx bx-x close_cart' onClick={() => document.querySelector(".cart").classList.remove("active")}></i>
+                </div>
+            </div>
+        </main>
+    );
+};
+
+export default Catalog;

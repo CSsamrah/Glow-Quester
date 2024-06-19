@@ -1,5 +1,3 @@
-// app.js
-
 import React from 'react';
 import './App.css';
 import Navbar from './Navbar/Navbar';
@@ -11,7 +9,7 @@ import Description from './Description';
 import TopPicks from './TopPicks';
 import Services from './Services';
 import Footer from './FooterEnd/FooterEnd';
-import Quiz from './Pages/quiz'; 
+import Quiz from './Pages/quiz';
 import TermsOfService from './Pages/TermsAndServices';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import TrackOrder from './Pages/TrackOrder';
@@ -21,27 +19,35 @@ import Faqs from './Pages/Faqs';
 import Location from './Pages/Location';
 import ShippingAndReturn from './Pages/ShippingAndReturn';
 import SignUp from './Pages/SignUp';
-
+import Catalog from './Pages/Catalog';
+import Cart from './Pages/Cart';
+import { CartProvider } from './Pages/CartContext'; // Adjust path as per your project structure
+import CheckoutForm from './Pages/CheckoutForm';
 
 function App() {
   return (
     <Router>
-      <Box>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/skintest" element={<QuizPage />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/track-order" element={<TrackOrder />} />
-          <Route path="/contact-page" element={<ContactPage />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/faq-s" element={<Faqs />} />
-          <Route path="/loc-ation" element={<Location />} />
-          <Route path="/shipping-return" element={<ShippingAndReturn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-        </Routes>
-      </Box>
+      <CartProvider>
+        <Box>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/skintest" element={<QuizPage />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/track-order" element={<TrackOrder />} />
+            <Route path="/contact-page" element={<ContactPage />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/faq-s" element={<Faqs />} />
+            <Route path="/loc-ation" element={<Location />} />
+            <Route path="/shipping-return" element={<ShippingAndReturn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<CheckoutForm />} />
+          </Routes>
+        </Box>
+      </CartProvider>
     </Router>
   );
 }
@@ -70,4 +76,8 @@ const HomePage = () => (
 const QuizPage = () => <Quiz />;
 
 export default App;
+
+
+
+
 

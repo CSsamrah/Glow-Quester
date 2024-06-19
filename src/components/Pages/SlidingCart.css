@@ -1,0 +1,51 @@
+/* SlidingCart.css */
+
+.sliding_cart {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start off-screen */
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease-in-out;
+  }
+  
+  .sliding_cart.open {
+    right: 0; /* Slide in when open */
+  }
+  
+  .sliding_cart_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .sliding_cart_items {
+    padding: 10px;
+    overflow-y: auto;
+  }
+  
+  .sliding_cart_item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .sliding_cart_footer {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .sliding_cart_footer button {
+    margin: 5px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  

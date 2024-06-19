@@ -1,0 +1,69 @@
+/* CheckoutForm.css */
+
+.checkout_form_container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .checkout_form_container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .checkout_form_container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .checkout_form_container label {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .checkout_form_container input,
+  .checkout_form_container select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .checkout_form_container select {
+    appearance: none;
+  }
+  
+  .checkout_form_container .button_group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .checkout_form_container button {
+    padding: 12px;
+    width: 48%; /* Adjust button width as needed */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .checkout_form_container button:hover {
+    background-color: #45a049;
+  }
+  
+  .checkout_form_container button[type="button"] {
+    background-color: #f44336;
+  }
+  
+  .checkout_form_container button[type="button"]:hover {
+    background-color: #da190b;
+  }
+  

@@ -100,7 +100,7 @@ function NavTabs() {
             >
                 <LinkTab label="Home" to="/" sx={{ fontWeight: '800', fontFamily: 'Inter' }} />
                 <LinkTab label="Quiz" to="/skintest" sx={{ fontWeight: '800', fontFamily: 'Inter' }} />
-                <LinkTab label="Skincare" to="/skincare" sx={{ fontWeight: '800', fontFamily: 'Inter' }} />
+                <LinkTab label="Skincare" to="/catalog" sx={{ fontWeight: '800', fontFamily: 'Inter' }} />
             </Tabs>
         </Box>
     );
@@ -337,5 +337,6 @@ export default function PrimarySearchAppBar() {
         </ThemeProvider>
     );
 }
+
 
 
