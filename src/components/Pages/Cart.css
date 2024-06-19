@@ -74,11 +74,17 @@
     font-weight: bold;
   }
   
-  /* Styling for price details section */
-  .price_detail {
+  /* Styling for centered price details section */
+  .price_detail_centered {
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
     border-top: 1px solid #ccc;
     padding-top: 10px;
+  }
+  
+  .price_detail {
+    width: 300px; /* Adjust width as needed */
   }
   
   .price_row {
@@ -94,5 +100,20 @@
   .subtotal_price,
   .total_price {
     font-weight: bold;
+  }
+  
+  .checkout_button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .checkout_button:hover {
+    background-color: #45a049;
   }
   
