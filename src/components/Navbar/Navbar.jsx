@@ -243,16 +243,16 @@ export default function PrimarySearchAppBar() {
                 </ListItem>
                 <Collapse in={skincareOpen} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        <ListItem button sx={{ pl: 4 }}>
+                        <ListItem button component={Link} to="/skincare/cleansers" sx={{ pl: 4 }}>
                             <ListItemText primary="Cleansers" />
                         </ListItem>
-                        <ListItem button sx={{ pl: 4 }}>
+                        <ListItem button component={Link} to="/skincare/moisturizers" sx={{ pl: 4 }}>
                             <ListItemText primary="Moisturizers" />
                         </ListItem>
-                        <ListItem button sx={{ pl: 4 }}>
+                        <ListItem button component={Link} to="/skincare/serums" sx={{ pl: 4 }}>
                             <ListItemText primary="Serums" />
                         </ListItem>
-                        <ListItem button sx={{ pl: 4 }}>
+                        <ListItem button component={Link} to="/skincare/sunscreen" sx={{ pl: 4 }}>
                             <ListItemText primary="Sunscreen" />
                         </ListItem>
                     </List>

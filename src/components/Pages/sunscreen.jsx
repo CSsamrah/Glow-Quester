@@ -5,30 +5,36 @@ import './Catalog.css';
 import SlidingCart from './SlidingCart'; // Import SlidingCart component
 
 // Import images
-import img1 from '../images/Deep Cleansing.png';
-import img2 from '../images/cleanser2.png'; // Replace with actual path
-import img3 from '../images/cleanser3.png'; // Replace with actual path
+import img1 from '../images/sunscreen1.png';
+import img2 from '../images/sunscreen2.png'; // Replace with actual path
+import img3 from '../images/sunscreen3.png'; // Replace with actual path
+import img4 from '../images/sunscreen4.png';
 
-const Catalog = () => {
+const Sunscreen = () => {
   const { addToCart } = useCart();
   const navigate = useNavigate();
   const [isSlidingCartOpen, setSlidingCartOpen] = useState(false);
 
   const products = [
     {
-      title: 'GlossyBox Skincare: Deep Cleansing Cream',
-      price: 'Rs.1500',
+      title: 'MISSHA Soft Finish Sun Milk',
+      price: 'Rs.1700',
       image: img1
     },
     {
-      title: 'Product 2',
-      price: '$20.00',
+      title: 'SALT & SOFT: Natural Mineral Sunscreen Lotion',
+      price: 'Rs.2000',
       image: img2
     },
     {
-      title: 'Product 3',
-      price: '$30.00',
+      title: 'The Ordinary Sunscreen',
+      price: 'Rs.1800',
       image: img3
+    },
+    {
+      title: 'Tatcha: The Silk Sunscreen',
+      price: 'Rs.6500',
+      image: img4
     }
   ];
 
@@ -76,15 +82,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
-
-
-
-
-
-
-
-
-
-
-
+export default Sunscreen;

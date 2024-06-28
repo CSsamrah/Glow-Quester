@@ -5,30 +5,36 @@ import './Catalog.css';
 import SlidingCart from './SlidingCart'; // Import SlidingCart component
 
 // Import images
-import img1 from '../images/Deep Cleansing.png';
-import img2 from '../images/cleanser2.png'; // Replace with actual path
-import img3 from '../images/cleanser3.png'; // Replace with actual path
+import img1 from '../images/serum1.png';
+import img2 from '../images/serum2.png'; // Replace with actual path
+import img3 from '../images/serum3.png'; // Replace with actual path
+import img4 from '../images/serum4.png';
 
-const Catalog = () => {
+const Serum = () => {
   const { addToCart } = useCart();
   const navigate = useNavigate();
   const [isSlidingCartOpen, setSlidingCartOpen] = useState(false);
 
   const products = [
     {
-      title: 'GlossyBox Skincare: Deep Cleansing Cream',
-      price: 'Rs.1500',
+      title: 'Glow Recipe: Watermelon Glow Niacinamide Dew Drops',
+      price: 'Rs.3500',
       image: img1
     },
     {
-      title: 'Product 2',
-      price: '$20.00',
+      title: 'ValJean Labs: Hydrate Facial Serum',
+      price: 'Rs.1200',
       image: img2
     },
     {
-      title: 'Product 3',
-      price: '$30.00',
+      title: 'Anua: Peach 70 Niacin Serum',
+      price: 'Rs.2200',
       image: img3
+    },
+    {
+      title: 'PIXI Skintreats: Hydrating Milky Serum',
+      price: 'Rs.2500',
+      image: img4
     }
   ];
 
@@ -76,15 +82,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
-
-
-
-
-
-
-
-
-
-
-
+export default Serum;

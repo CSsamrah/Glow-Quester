@@ -5,30 +5,36 @@ import './Catalog.css';
 import SlidingCart from './SlidingCart'; // Import SlidingCart component
 
 // Import images
-import img1 from '../images/Deep Cleansing.png';
-import img2 from '../images/cleanser2.png'; // Replace with actual path
-import img3 from '../images/cleanser3.png'; // Replace with actual path
+import img1 from '../images/moisturizer1.png';
+import img2 from '../images/moisturizer2.png'; // Replace with actual path
+import img3 from '../images/moisturizer3.png'; // Replace with actual path
+import img4 from '../images/moisturizer4.png';
 
-const Catalog = () => {
+const Moisturizer = () => {
   const { addToCart } = useCart();
   const navigate = useNavigate();
   const [isSlidingCartOpen, setSlidingCartOpen] = useState(false);
 
   const products = [
     {
-      title: 'GlossyBox Skincare: Deep Cleansing Cream',
-      price: 'Rs.1500',
+      title: 'COSRX: Oil-Free Ultra-Moisturizing Lotion (with Birch Sap)',
+      price: 'Rs.1800',
       image: img1
     },
     {
-      title: 'Product 2',
-      price: '$20.00',
+      title: 'Summer Fridays: Cloud Dew Oil-Free Gel Cream',
+      price: 'Rs.3000',
       image: img2
     },
     {
-      title: 'Product 3',
-      price: '$30.00',
+      title: 'Summer Fridays: Rich Cushion Cream, Ultra-Plumping ',
+      price: 'Rs.3500',
       image: img3
+    },
+    {
+      title: 'Glow Recipe: Watermelon Glow Pink Juice Moisturizer',
+      price: 'Rs.2800',
+      image: img4
     }
   ];
 
@@ -76,15 +82,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
-
-
-
-
-
-
-
-
-
-
-
+export default Moisturizer;

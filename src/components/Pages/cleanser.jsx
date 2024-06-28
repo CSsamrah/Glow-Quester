@@ -5,11 +5,11 @@ import './Catalog.css';
 import SlidingCart from './SlidingCart'; // Import SlidingCart component
 
 // Import images
-import img1 from '../images/Deep Cleansing.png';
+import img1 from '../images/cleanser1.png';
 import img2 from '../images/cleanser2.png'; // Replace with actual path
 import img3 from '../images/cleanser3.png'; // Replace with actual path
 
-const Catalog = () => {
+const Cleanser = () => {
   const { addToCart } = useCart();
   const navigate = useNavigate();
   const [isSlidingCartOpen, setSlidingCartOpen] = useState(false);
@@ -21,13 +21,13 @@ const Catalog = () => {
       image: img1
     },
     {
-      title: 'Product 2',
-      price: '$20.00',
+      title: 'Glow Recipe: Blueberry Bounce Gentle Cleanser',
+      price: 'Rs.2200',
       image: img2
     },
     {
-      title: 'Product 3',
-      price: '$30.00',
+      title: 'Anua: Heartleaf Pore Control Cleansing Oil',
+      price: 'Rs.2800',
       image: img3
     }
   ];
@@ -76,15 +76,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
-
-
-
-
-
-
-
-
-
-
-
+export default Cleanser;

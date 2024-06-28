@@ -10,6 +10,10 @@ import TopPicks from './TopPicks';
 import Services from './Services';
 import Footer from './FooterEnd/FooterEnd';
 import Quiz from './Pages/quiz';
+import Cleansers from './Pages/cleanser';
+import Moisturizers from './Pages/moisturizer';
+import Serums from './Pages/serum';
+import Sunscreens from './Pages/sunscreen';
 import TermsOfService from './Pages/TermsAndServices';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import TrackOrder from './Pages/TrackOrder';
@@ -33,6 +37,10 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/skintest" element={<QuizPage />} />
+            <Route path="/skincare/cleansers" element={<Cleansers />} />
+            <Route path="/skincare/moisturizers" element={<Moisturizers />} />
+            <Route path="/skincare/serums" element={<Serums />} />
+            <Route path="/skincare/sunscreen" element={<Sunscreens />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/track-order" element={<TrackOrder />} />
