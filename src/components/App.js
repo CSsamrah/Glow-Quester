@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Navbar from './Navbar/Navbar';
 import { Box } from '@mui/material';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import MainVideo from './MainVideo/MainVideo';
 import Properties from './Properties';
 import Description from './Description';
@@ -27,13 +27,17 @@ import Catalog from './Pages/Catalog';
 import Cart from './Pages/Cart';
 import { CartProvider } from './Pages/CartContext'; // Adjust path as per your project structure
 import CheckoutForm from './Pages/CheckoutForm';
+import Admin from './Pages/AdminPage';
 
 function App() {
+  const location = useLocation();
+  const isAdminPage = location.pathname === '/admin';
+
   return (
     <Router>
       <CartProvider>
         <Box>
-          <Navbar />
+          {!isAdminPage && <Navbar />}
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/skintest" element={<QuizPage />} />
@@ -53,6 +57,7 @@ function App() {
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<CheckoutForm />} />
+          <Route path="/admin" element={<Admin />} />
           </Routes>
         </Box>
       </CartProvider>
@@ -83,9 +88,12 @@ const HomePage = () => (
 
 const QuizPage = () => <Quiz />;
 
-export default App;
+function MainApp() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
 
-
-
-
-
+export default MainApp;
