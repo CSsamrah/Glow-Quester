@@ -6,9 +6,11 @@ import SlidingCart from './SlidingCart'; // Import SlidingCart component
 
 // Import images
 import img1 from '../images/serum1.png';
-import img2 from '../images/serum2.png'; // Replace with actual path
-import img3 from '../images/serum3.png'; // Replace with actual path
+import img2 from '../images/serum2.png'; 
+import img3 from '../images/serum3.png'; 
 import img4 from '../images/serum4.png';
+import addCart from '../images/AddToCart.png';
+
 
 const Serum = () => {
   const { addToCart } = useCart();
@@ -18,22 +20,22 @@ const Serum = () => {
   const products = [
     {
       title: 'Glow Recipe: Watermelon Glow Niacinamide Dew Drops',
-      price: 'Rs.3500',
+      price: '3500',
       image: img1
     },
     {
       title: 'ValJean Labs: Hydrate Facial Serum',
-      price: 'Rs.1200',
+      price: '1200',
       image: img2
     },
     {
       title: 'Anua: Peach 70 Niacin Serum',
-      price: 'Rs.2200',
+      price: '2200',
       image: img3
     },
     {
       title: 'PIXI Skintreats: Hydrating Milky Serum',
-      price: 'Rs.2500',
+      price: '2500',
       image: img4
     }
   ];
@@ -50,7 +52,7 @@ const Serum = () => {
           <div className="products">
             {products.map((product, index) => (
               <div className="product_card" key={index}>
-                <div className="product_image">
+                <div className="pro_image">
                   <img src={product.image} alt={product.title} />
                 </div>
                 <div className="product_features">
@@ -64,7 +66,7 @@ const Serum = () => {
                     className="add_to_cart_button"
                     onClick={() => addProductToCart(product)}
                   >
-                    ADD TO CART
+                    <img src={addCart} alt={product.title} />
                   </button>
                 </div>
               </div>

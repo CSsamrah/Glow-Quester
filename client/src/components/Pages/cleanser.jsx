@@ -6,8 +6,10 @@ import SlidingCart from './SlidingCart'; // Import SlidingCart component
 
 // Import images
 import img1 from '../images/cleanser1.png';
-import img2 from '../images/cleanser2.png'; // Replace with actual path
-import img3 from '../images/cleanser3.png'; // Replace with actual path
+import img2 from '../images/cleanser2.png';
+import img3 from '../images/cleanser3.png'; 
+import addCart from '../images/AddToCart.png';
+
 
 const Cleanser = () => {
   const { addToCart } = useCart();
@@ -17,17 +19,17 @@ const Cleanser = () => {
   const products = [
     {
       title: 'GlossyBox Skincare: Deep Cleansing Cream',
-      price: 'Rs.1500',
+      price: '1500',
       image: img1
     },
     {
       title: 'Glow Recipe: Blueberry Bounce Gentle Cleanser',
-      price: 'Rs.2200',
+      price: '2200',
       image: img2
     },
     {
       title: 'Anua: Heartleaf Pore Control Cleansing Oil',
-      price: 'Rs.2800',
+      price: '2800',
       image: img3
     }
   ];
@@ -44,7 +46,7 @@ const Cleanser = () => {
           <div className="products">
             {products.map((product, index) => (
               <div className="product_card" key={index}>
-                <div className="product_image">
+                <div className="pro_image">
                   <img src={product.image} alt={product.title} />
                 </div>
                 <div className="product_features">
@@ -58,7 +60,7 @@ const Cleanser = () => {
                     className="add_to_cart_button"
                     onClick={() => addProductToCart(product)}
                   >
-                    ADD TO CART
+                    <img src={addCart} alt={product.title} />
                   </button>
                 </div>
               </div>
