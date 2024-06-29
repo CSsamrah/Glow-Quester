@@ -99,3 +99,16 @@ tr:hover {
 .add-product-form button:hover {
     background-color: #45a049;
 }
+input{
+    height:40px;
+    width:170px;
+}
+.selected-shipment-details,.selected-order-details{
+    line-height: 40px;
+}
+h4{
+    font-size: 1.5em;
+    font-weight: 700;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(19, 19, 208);
+}
