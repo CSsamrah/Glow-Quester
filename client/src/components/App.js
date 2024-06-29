@@ -34,10 +34,10 @@ function App() {
   const isAdminPage = location.pathname === '/admin';
 
   return (
-    <Router>
-      <CartProvider>
-        <Box>
-          {!isAdminPage && <Navbar />}
+    <CartProvider>
+      <Box>
+        {!isAdminPage && <Navbar className="navbar" />}
+        <div className="content">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/skintest" element={<QuizPage />} />
@@ -57,11 +57,11 @@ function App() {
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<CheckoutForm />} />
-          <Route path="/admin" element={<Admin />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
-        </Box>
-      </CartProvider>
-    </Router>
+        </div>
+      </Box>
+    </CartProvider>
   );
 }
 
