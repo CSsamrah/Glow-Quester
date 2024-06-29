@@ -6,9 +6,11 @@ import SlidingCart from './SlidingCart'; // Import SlidingCart component
 
 // Import images
 import img1 from '../images/sunscreen1.png';
-import img2 from '../images/sunscreen2.png'; // Replace with actual path
-import img3 from '../images/sunscreen3.png'; // Replace with actual path
+import img2 from '../images/sunscreen2.png'; 
+import img3 from '../images/sunscreen3.png'; 
 import img4 from '../images/sunscreen4.png';
+import addCart from '../images/AddToCart.png';
+
 
 const Sunscreen = () => {
   const { addToCart } = useCart();
@@ -18,22 +20,22 @@ const Sunscreen = () => {
   const products = [
     {
       title: 'MISSHA Soft Finish Sun Milk',
-      price: 'Rs.1700',
+      price: '1700',
       image: img1
     },
     {
       title: 'SALT & SOFT: Natural Mineral Sunscreen Lotion',
-      price: 'Rs.2000',
+      price: '2000',
       image: img2
     },
     {
       title: 'The Ordinary Sunscreen',
-      price: 'Rs.1800',
+      price: '1800',
       image: img3
     },
     {
       title: 'Tatcha: The Silk Sunscreen',
-      price: 'Rs.6500',
+      price: '6500',
       image: img4
     }
   ];
@@ -50,7 +52,7 @@ const Sunscreen = () => {
           <div className="products">
             {products.map((product, index) => (
               <div className="product_card" key={index}>
-                <div className="product_image">
+                <div className="pro_image">
                   <img src={product.image} alt={product.title} />
                 </div>
                 <div className="product_features">
@@ -64,7 +66,7 @@ const Sunscreen = () => {
                     className="add_to_cart_button"
                     onClick={() => addProductToCart(product)}
                   >
-                    ADD TO CART
+                    <img src={addCart} alt={product.title} />
                   </button>
                 </div>
               </div>
