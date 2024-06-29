@@ -28,6 +28,7 @@ import Cart from './Pages/Cart';
 import { CartProvider } from './Pages/CartContext'; // Adjust path as per your project structure
 import CheckoutForm from './Pages/CheckoutForm';
 import Admin from './Pages/AdminPage';
+import OrderSummary from './Pages/OrderSummary';
 
 function App() {
   const location = useLocation();
@@ -57,6 +58,7 @@ function App() {
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<CheckoutForm />} />
+            <Route path="/order-summary" element={<OrderSummary />} />
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </div>

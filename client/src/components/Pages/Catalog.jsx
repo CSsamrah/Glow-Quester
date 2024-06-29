@@ -17,17 +17,17 @@ const Catalog = () => {
   const products = [
     {
       title: 'GlossyBox Skincare: Deep Cleansing Cream',
-      price: 'Rs.1500',
+      price: '1500',
       image: img1
     },
     {
       title: 'Product 2',
-      price: '$20.00',
+      price: '2000',
       image: img2
     },
     {
       title: 'Product 3',
-      price: '$30.00',
+      price: '3000',
       image: img3
     }
   ];
