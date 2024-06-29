@@ -23,7 +23,28 @@
     background-color: #f0f0f0;
     border-bottom: 1px solid #ccc;
   }
+
+  .close_sliding_cart{
+    font-size: 20px;
+    background: none;
+    color:black
+  }
+
+  .sliding_cart_item_quantity{
+    width:50px;
+    height: 20px;
+  }
   
+  .sliding_cart_remove{
+    font-size: 20px;
+    background: none;
+    color: red;
+  }
+
+  .view_full_cart_button{
+    background-color: #cb8377;
+  }
+
   .sliding_cart_items {
     padding: 10px;
     overflow-y: auto;
@@ -32,6 +53,11 @@
   .sliding_cart_item {
     padding: 10px;
     border-bottom: 1px solid #ccc;
+  }
+
+  .sliding_cart_item_price{
+    padding-top: 10px;
+    font-weight: bold;
   }
   
   .sliding_cart_footer {

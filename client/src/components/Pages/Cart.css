@@ -1,119 +1,94 @@
-/* Cart.css */
-
-/* Main styles for the entire cart page */
 .main {
-    padding: 20px;
-  }
-  
-  /* Styling for the cart header */
-  .cart_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f0f0f0;
-    font-weight: bold;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .cart_header > div {
-    flex: 1;
-    text-align: center;
-  }
-  
-  /* Styling for each item in the cart */
-  .cart_box {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .product_image {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    margin-right: 20px;
-  }
-  
-  .detail_box {
-    flex: 1;
-  }
-  
-  .cart_product_title {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .cart_product_price {
-    color: #666;
-    margin-bottom: 5px;
-  }
-  
-  .cart_product_quantity {
-    width: 60px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .cart_remove {
-    cursor: pointer;
-    font-size: 20px;
-    color: #ccc;
-    margin-left: 10px;
-  }
-  
-  /* Styling for subtotal section */
-  .subtotal {
-    flex: 0 0 100px; /* Fixed width for subtotal column */
-    text-align: center;
-  }
-  
-  .sub_price {
-    font-weight: bold;
-  }
-  
-  /* Styling for centered price details section */
-  .price_detail_centered {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-  }
-  
-  .price_detail {
-    width: 300px; /* Adjust width as needed */
-  }
-  
-  .price_row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .price_label {
-    font-weight: bold;
-  }
-  
-  .subtotal_price,
-  .total_price {
-    font-weight: bold;
-  }
-  
-  .checkout_button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .checkout_button:hover {
-    background-color: #45a049;
-  }
-  
+  background-color: #DAB49D;
+}
+.cart_page {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding:100px 20px 20px 20px;
+  background-color: #DAB49D;
+}
+
+.cart_header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.cart_info {
+  margin-top: 20px;
+}
+
+.cart_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.detail_box {
+  flex: 2;
+}
+
+.quantity_box {
+  flex: 1;
+}
+
+.subtotal {
+  flex: 1;
+  text-align: right;
+}
+
+/* .cart_product_title {
+  font-weight: bold;
+} */
+
+.cart_product_price, .cart_remove {
+  margin-left: 10px;
+}
+
+.cart_remove {
+  width: 50px;
+  font-size: 25px;
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+
+.cart_product_quantity {
+  width: 60px;
+  height: 40px;
+  font-size: 16px;
+}
+
+.total_section {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.total_label {
+  margin-right: 10px;
+}
+
+.checkout_section {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.checkout_button {
+  padding: 10px 20px;
+  background-color: #cb8377;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.checkout_button:hover {
+  background-color: #c0867c;
+}
