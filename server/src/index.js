@@ -30,22 +30,28 @@ app.post("/add-product", upload.single('picture'), async (req, res) => {
 // get product details
 app.get('/product/:product_id', async (req, res) => {
     const { product_id } = req.params;
-
+  
     try {
-        const selectQuery = 'SELECT * FROM product WHERE product_id = $1';
-        const result = await pool.query(selectQuery, [product_id]);
-
-        if (result.rows.length > 0) {
-            const product = result.rows[0];
-            res.json(product);
-        } else {
-            res.status(404).send('Product not found');
-        }
+      const selectQuery = 'SELECT * FROM product WHERE product_id = $1';
+      const result = await pool.query(selectQuery, [product_id]);
+  
+      if (result.rows.length > 0) {
+        const product = result.rows[0];
+        // Assuming 'image_data' is the column containing bytea data
+        const imageData = product.picture.toString('base64');
+        const productWithBase64Image = {
+          ...product,
+          image_data: imageData,
+        };
+        res.json(productWithBase64Image);
+      } else {
+        res.status(404).send('Product not found');
+      }
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+      console.error(error);
+      res.status(500).send('Internal Server Error');
     }
-});
+  });
 
 //delete product
 app.delete("/product/:product_id", async (req, res) => {

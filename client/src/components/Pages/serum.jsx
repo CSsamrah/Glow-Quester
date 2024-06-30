@@ -17,23 +17,27 @@ const Serum = () => {
   const navigate = useNavigate();
   const [isSlidingCartOpen, setSlidingCartOpen] = useState(false);
 
+  const navigateToProductDetail = (productId) => {
+    navigate(`/product/${productId}`);
+  };
+
   const products = [
-    {
+    { id:'p8',
       title: 'Glow Recipe: Watermelon Glow Niacinamide Dew Drops',
       price: '3500',
       image: img1
     },
-    {
+    { id:'p9',
       title: 'ValJean Labs: Hydrate Facial Serum',
       price: '1200',
       image: img2
     },
-    {
+    { id:'p10',
       title: 'Anua: Peach 70 Niacin Serum',
       price: '2200',
       image: img3
     },
-    {
+    { id:'p11',
       title: 'PIXI Skintreats: Hydrating Milky Serum',
       price: '2500',
       image: img4
@@ -50,12 +54,12 @@ const Serum = () => {
       <div className="catalog">
         <div className="catalog_container">
           <div className="products">
-            {products.map((product, index) => (
-              <div className="product_card" key={index}>
-                <div className="pro_image">
+            {products.map((product) => (
+              <div className="product_card" key={product.id}>
+                <div className="pro_image" onClick={() => navigateToProductDetail(product.id)}>
                   <img src={product.image} alt={product.title} />
                 </div>
-                <div className="product_features">
+                <div className="product_features" onClick={() => navigateToProductDetail(product.id)}>
                   <p>{product.title}</p>
                 </div>
                 <div className="price">

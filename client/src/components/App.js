@@ -30,6 +30,7 @@ import Admin from './Pages/AdminPage';
 import OrderSummary from './Pages/OrderSummary';
 import SignUpPage from './Pages/SignUpPage';
 import SignInPage from './Pages/SignIn';
+import ProductDetail from'./ProductDetail'
 
 function App() {
   const location = useLocation();
@@ -62,6 +63,7 @@ function App() {
             <Route path="/checkout" element={<CheckoutForm />} />
             <Route path="/order-summary" element={<OrderSummary />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/product/:product_id" element={<ProductDetail />} />
           </Routes>
         </div>
       </Box>
