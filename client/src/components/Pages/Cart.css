@@ -1,12 +1,12 @@
 .main {
-  background-color: #DAB49D;
+  background-color: rgb(221, 171, 207);
 }
 .cart_page {
   width: 100%;
   max-width: 800px;
-  margin: 0 auto;
-  padding:100px 20px 20px 20px;
-  background-color: #DAB49D;
+  margin: 5em auto;
+  padding:50px 20px 20px 20px;
+  background-color:rgb(241, 225, 237);
 }
 
 .cart_header {
@@ -82,7 +82,7 @@
 
 .checkout_button {
   padding: 10px 20px;
-  background-color: #cb8377;
+  background-color: #ae33d3;
   color: white;
   border: none;
   cursor: pointer;

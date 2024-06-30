@@ -2,10 +2,7 @@ import React from 'react';
 import { useCart } from './CartContext'; // Adjust path as per your project structure
 import './SlidingCart.css'; // Assuming you'll have separate styles for sliding cart
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-
-
+import { faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const SlidingCart = ({ isOpen, onClose, onViewFullCart }) => {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
@@ -25,7 +22,6 @@ const SlidingCart = ({ isOpen, onClose, onViewFullCart }) => {
         <button className="close_sliding_cart" onClick={onClose}>
           <FontAwesomeIcon icon={faTimes} />
         </button>
-
       </div>
       <div className="sliding_cart_items">
         {cartItems.map((item) => (
@@ -59,5 +55,3 @@ const SlidingCart = ({ isOpen, onClose, onViewFullCart }) => {
 };
 
 export default SlidingCart;
-
-
