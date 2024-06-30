@@ -147,20 +147,35 @@ app.post("/sign-up", async (req, res) => {
 
 // sign in
 
-app.get("/sign-In", async (req, res) => {
+app.post("/login", async (req, res) => {
     try {
-        const { password, email } = req.body;
+        const { email, password } = req.body;
 
-        const verifyCustomer = await pool.query('SELECT * FROM customer WHERE email=$1 AND password=$2', [email, password])
-        if (verifyCustomer.rowCount > 0) {
-            res.status(200).send('signed in');
+        // Fetch customer by email
+        const customerQuery = await pool.query('SELECT password FROM customer WHERE email = $1', [email]);
+        console.log(customerQuery.rows); // Log query result
+
+        if (customerQuery.rowCount > 0) {
+            const hashedPassword = customerQuery.rows[0].password;
+
+            bcrypt.compare(password, hashedPassword, (err, result) => {
+                if (err) {
+                    res.status(500).json({ error: 'Internal server error' });
+                } else if (result) {
+                    res.status(200).json({ message: 'Login successful' });
+                } else {
+                    res.status(401).json({ error: 'Invalid username or password' });
+                }
+            });
         } else {
-            res.status(404).send('customer not found');
+            res.status(404).json({ error: 'Customer not found' });
         }
     } catch (error) {
-        console.error(error.message)
+        console.error(error.message);
+        res.status(500).send('Server error');
     }
 });
+
 
 // get all order details
 app.get("/orderDetails", async (req, res) => {
