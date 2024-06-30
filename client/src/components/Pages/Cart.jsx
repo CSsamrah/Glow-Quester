@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from './CartContext'; // Adjust path as per your project structure
 import './Cart.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
@@ -20,6 +22,12 @@ const Cart = () => {
     navigate('/checkout');
   };
 
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => {
+      return total + parseFloat(item.price.replace('$', '')) * item.quantity;
+    }, 0).toFixed(2);
+  };
+
   return (
     <main>
       <div className="cart_page">
@@ -34,20 +42,22 @@ const Cart = () => {
               <div className="detail_box">
                 <div className="cart_product_title">{item.title}</div>
                 <div className="cart_product_price">{item.price}</div>
-                <input
-                  type="number"
-                  value={item.quantity}
-                  className="cart_product_quantity"
-                  onChange={(e) =>
-                    handleQuantityChange(item.title, parseInt(e.target.value))
-                  }
-                />
                 <button
                   className="cart_remove"
                   onClick={() => removeCartItem(item.title)}
                 >
-                  Remove
+                  <FontAwesomeIcon icon={faTrash} />
                 </button>
+                </div>
+                <div className='quantity_box'>
+                  <input
+                    type="number"
+                    value={item.quantity}
+                    className="cart_product_quantity"
+                    onChange={(e) =>
+                      handleQuantityChange(item.title, parseInt(e.target.value))
+                    }
+                  />
               </div>
               <div className="subtotal">
                 <div className="sub_price">
@@ -56,6 +66,10 @@ const Cart = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div className="total_section">
+          <div className="total_label">Total:</div>
+          <div className="total_price">${calculateTotal()}</div>
         </div>
         <div className="checkout_section">
           <button className="checkout_button" onClick={handleCheckout}>
