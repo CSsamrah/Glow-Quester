@@ -236,7 +236,7 @@
     width: 360px;
     min-height: 100vh;
     padding: 20px;
-    background-color: #F3E9DC;
+    background-color: rgb(241, 225, 237);
     box-shadow: -2px 0 4px hsl(0 4% 15% / 10%);
     transition: 1s;
   }
@@ -315,7 +315,7 @@
     margin: 20px auto 0 auto;
     padding: 12px 20px;
     border: none;
-    background-color: #cb8377;
+    background-color: rgb(241, 225, 237);
     color: #F3E9DC;
     font-size: 10px;
     font-weight: 500;
