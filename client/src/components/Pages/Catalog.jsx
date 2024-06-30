@@ -124,7 +124,7 @@ const Catalog = () => {
                   <p>{product.title}</p>
                 </div>
                 <div className="price">
-                  <b>{product.price}</b>
+                  <b>Rs.{product.price}</b>
                 </div>
                 <div className="button">
                   <button

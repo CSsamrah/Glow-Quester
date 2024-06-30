@@ -24,7 +24,7 @@ const Cart = () => {
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
-      return total + parseFloat(item.price.replace('$', '')) * item.quantity;
+      return total + parseFloat(item.price.replace('Rs.', '')) * item.quantity;
     }, 0).toFixed(2);
   };
 
@@ -41,7 +41,7 @@ const Cart = () => {
             <div className="cart_box" key={item.title}>
               <div className="detail_box">
                 <div className="cart_product_title">{item.title}</div>
-                <div className="cart_product_price">{item.price}</div>
+                <div className="cart_product_price"><p>Rs.{item.price}</p></div>
                 <button
                   className="cart_remove"
                   onClick={() => removeCartItem(item.title)}
@@ -52,6 +52,7 @@ const Cart = () => {
                 <div className='quantity_box'>
                   <input
                     type="number"
+                    min={1}
                     value={item.quantity}
                     className="cart_product_quantity"
                     onChange={(e) =>
@@ -61,7 +62,7 @@ const Cart = () => {
               </div>
               <div className="subtotal">
                 <div className="sub_price">
-                  ${(parseFloat(item.price.replace('$', '')) * item.quantity).toFixed(2)}
+                  Rs.{(parseFloat(item.price.replace('Rs.', '')) * item.quantity).toFixed(2)}
                 </div>
               </div>
             </div>
@@ -69,7 +70,7 @@ const Cart = () => {
         </div>
         <div className="total_section">
           <div className="total_label">Total:</div>
-          <div className="total_price">${calculateTotal()}</div>
+          <div className="total_price">Rs.{calculateTotal()}</div>
         </div>
         <div className="checkout_section">
           <button className="checkout_button" onClick={handleCheckout}>

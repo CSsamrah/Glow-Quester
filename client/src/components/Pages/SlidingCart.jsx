@@ -27,9 +27,10 @@ const SlidingCart = ({ isOpen, onClose, onViewFullCart }) => {
         {cartItems.map((item) => (
           <div className="sliding_cart_item" key={item.title}>
             <div className="sliding_cart_item_title">{item.title}</div>
-            <div className="sliding_cart_item_price">{item.price}</div>
+            <div className="sliding_cart_item_price"><p>Rs.{item.price}</p></div>
             <input
               type="number"
+              min={1}
               value={item.quantity}
               className="sliding_cart_item_quantity"
               onChange={(e) =>
