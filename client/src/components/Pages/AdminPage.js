@@ -2,20 +2,23 @@ import React, { useState } from 'react';
 import CustomerDetails from '../CustomerDetails';
 import ProductDetails from '../ProductDetails';
 import OrderDetails from '../OrderDetails';
-import ShipmentDetails from '../ShipmentDetails'; // Import the new ShipmentDetails component
+import ShipmentDetails from '../ShipmentDetails';
+import RegisteredCustomers from '../RegisteredCustomers';
 import './AdminPage.css';
 
 export default function Admin() {
     const [showCustomers, setShowCustomers] = useState(false);
     const [showProducts, setShowProducts] = useState(false);
     const [showOrders, setShowOrders] = useState(false);
-    const [showShipments, setShowShipments] = useState(false); // State to toggle ShipmentDetails visibility
+    const [showShipments, setShowShipments] = useState(false);
+    const [showRegistered, setShowRegistered] = useState(false);
 
     const handleShowCustomers = () => {
         setShowCustomers(true);
         setShowProducts(false);
         setShowOrders(false);
         setShowShipments(false);
+        setShowRegistered(false);
     };
 
     const handleShowProducts = () => {
@@ -23,6 +26,7 @@ export default function Admin() {
         setShowProducts(true);
         setShowOrders(false);
         setShowShipments(false);
+        setShowRegistered(false);
     };
 
     const handleShowOrders = () => {
@@ -30,6 +34,7 @@ export default function Admin() {
         setShowProducts(false);
         setShowOrders(true);
         setShowShipments(false);
+        setShowRegistered(false);
     };
 
     const handleShowShipments = () => {
@@ -37,6 +42,15 @@ export default function Admin() {
         setShowProducts(false);
         setShowOrders(false);
         setShowShipments(true);
+        setShowRegistered(false);
+    };
+
+    const handleShowRegistered = () => {
+        setShowCustomers(false);
+        setShowProducts(false);
+        setShowOrders(false);
+        setShowShipments(false);
+        setShowRegistered(true);
     };
 
     return (
@@ -45,12 +59,14 @@ export default function Admin() {
             <button onClick={handleShowCustomers}>Customers</button>
             <button onClick={handleShowProducts}>Product Details</button>
             <button onClick={handleShowOrders}>Order Details</button>
-            <button onClick={handleShowShipments}>Shipment Details</button> {/* New button for Shipment Details */}
+            <button onClick={handleShowShipments}>Shipment Details</button>
+            <button onClick={handleShowRegistered}>Registered Customer Details</button>
 
             {showCustomers && <CustomerDetails />}
             {showProducts && <ProductDetails />}
             {showOrders && <OrderDetails />}
-            {showShipments && <ShipmentDetails />} {/* Render ShipmentDetails component based on state */}
+            {showShipments && <ShipmentDetails />}
+            {showRegistered && <RegisteredCustomers />}
         </div>
     );
 }

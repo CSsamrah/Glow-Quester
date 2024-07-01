@@ -137,6 +137,36 @@ app.get('/customers', async (req, res) => {
     }
 });
 
+
+//  get registered customer information
+app.get('/registered-customers', async (req, res) => {
+    try {
+        const selectQuery = 'SELECT * FROM registration';
+        const result = await pool.query(selectQuery);
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.get('/registered-customers/:user_id', async (req, res) => {
+    const { user_id } = req.params;
+    try {
+        const selectQuery = 'SELECT * FROM registration WHERE user_id = $1';
+        const result = await pool.query(selectQuery, [user_id]);
+        if (result.rows.length > 0) {
+            res.json(result.rows[0]);
+        } else {
+            res.status(404).send('registered customer detail not found');
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
 // insert customer information(sign up)
 app.post("/sign-up", async (req, res) => {
     try {
