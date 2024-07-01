@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CheckoutForm.css';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
-import { useCart } from '../Pages/CartContext'; // Adjust path as per your project structure
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../Pages/CartContext';
 import Footer from '../FooterEnd/FooterEnd';
 
 const CheckoutForm = ({ onClose }) => {
@@ -9,22 +9,20 @@ const CheckoutForm = ({ onClose }) => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    phoneNumber: '', // New field for phone number
+    phoneNumber: '',
     address: '',
     city: '',
     zipCode: '',
-    paymentMethod: 'COD', // Default payment method
+    paymentMethod: 'COD',
   });
-  const navigate = useNavigate(); // Get the navigate function from react-router-dom
+  const navigate = useNavigate();
 
-  // Calculate total amount including delivery fee
   const calculateTotalAmount = () => {
     let subtotal = cartItems.reduce((total, item) => total + parseFloat(item.price.replace('$', '')) * item.quantity, 0);
     let deliveryFee = 200;
     return (subtotal + deliveryFee).toFixed(2);
   };
 
-  // Calculate total quantity of items in cart
   const calculateTotalQuantity = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
@@ -39,23 +37,23 @@ const CheckoutForm = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate form submission (replace with actual API call when available)
     try {
-      // Simulating API response delay
+      // Simulated API response delay
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      // Simulated success response
       const orderDetails = {
         ...formData,
         totalAmount: calculateTotalAmount(),
-        items: cartItems, // Include items in the order details
+        items: cartItems.map(item => ({
+          productId: item.id, // Include product ID
+          name: item.title,
+          quantity: item.quantity,
+        })),
       };
 
-      // Redirect to order summary page
       navigate('/order-summary', { state: { orderDetails } });
     } catch (error) {
       console.error('Error processing order:', error);
-      // Handle error scenario (display message, retry, etc.)
     }
   };
 
@@ -129,7 +127,7 @@ const CheckoutForm = ({ onClose }) => {
           <label>Items in Cart</label>
           <div className="cart_items">
             {cartItems.map((item) => (
-              <div key={item.title} className="cart_item">
+              <div key={item.id} className="cart_item">
                 <div>{item.title}</div>
                 <div>Quantity: {item.quantity}</div>
               </div>
@@ -153,8 +151,3 @@ const CheckoutForm = ({ onClose }) => {
 };
 
 export default CheckoutForm;
-
-
-
-
-

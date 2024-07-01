@@ -50,5 +50,26 @@
   .order_summary_total p {
     margin: 5px 0;
   }
+  .shipment_details {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
   
+  .shipment_details h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .shipment_details p {
+    margin: 5px 0;
+  }
+  
+  .shipment_details strong {
+    font-weight: bold;
+    margin-right: 5px;
+  }
   

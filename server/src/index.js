@@ -30,22 +30,28 @@ app.post("/add-product", upload.single('picture'), async (req, res) => {
 // get product details
 app.get('/product/:product_id', async (req, res) => {
     const { product_id } = req.params;
-
+  
     try {
-        const selectQuery = 'SELECT * FROM product WHERE product_id = $1';
-        const result = await pool.query(selectQuery, [product_id]);
-
-        if (result.rows.length > 0) {
-            const product = result.rows[0];
-            res.json(product);
-        } else {
-            res.status(404).send('Product not found');
-        }
+      const selectQuery = 'SELECT * FROM product WHERE product_id = $1';
+      const result = await pool.query(selectQuery, [product_id]);
+  
+      if (result.rows.length > 0) {
+        const product = result.rows[0];
+        // Assuming 'image_data' is the column containing bytea data
+        const imageData = product.picture.toString('base64');
+        const productWithBase64Image = {
+          ...product,
+          image_data: imageData,
+        };
+        res.json(productWithBase64Image);
+      } else {
+        res.status(404).send('Product not found');
+      }
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+      console.error(error);
+      res.status(500).send('Internal Server Error');
     }
-});
+  });
 
 //delete product
 app.delete("/product/:product_id", async (req, res) => {
@@ -138,8 +144,8 @@ app.post("/sign-up", async (req, res) => {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        const addcustomer = await pool.query('INSERT INTO customer(username,password,email,phoneno)values($1, $2, $3, $4)', [username, hashedPassword, email, phoneno])
-        res.status(201).send('customer added successfully');
+        const addcustomer = await pool.query('INSERT INTO registration(username,password,email,phoneno)values($1, $2, $3, $4)', [username, hashedPassword, email, phoneno])
+        res.status(201).send(' registered customer added successfully');
     } catch (error) {
         console.error(error.message)
     }
@@ -152,7 +158,7 @@ app.post("/login", async (req, res) => {
         const { email, password } = req.body;
 
         // Fetch customer by email
-        const customerQuery = await pool.query('SELECT password FROM customer WHERE email = $1', [email]);
+        const customerQuery = await pool.query('SELECT password FROM registration WHERE email = $1', [email]);
         console.log(customerQuery.rows); // Log query result
 
         if (customerQuery.rowCount > 0) {
@@ -168,7 +174,7 @@ app.post("/login", async (req, res) => {
                 }
             });
         } else {
-            res.status(404).json({ error: 'Customer not found' });
+            res.status(404).json({ error: 'registered user not found' });
         }
     } catch (error) {
         console.error(error.message);
@@ -178,101 +184,152 @@ app.post("/login", async (req, res) => {
 
 
 // get all order details
-app.get("/orderDetails", async (req, res) => {
+app.get('/orderDetails', async (req, res) => {
     try {
-        try {
-            const selectQuery = 'SELECT * FROM customer_order';
-            const result = await pool.query(selectQuery);
-            res.json(result.rows)
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('Internal Server Error');
-        }
-
+      const selectQuery = `
+        SELECT 
+          customer.customer_id, customer.username, customer.email,customer.phoneno,customer.address,customer.city, "order".order_id, "order".total_amount,
+          order_item.product_id, order_item.total_quantity, product.product_name
+        FROM 
+          customer
+        INNER JOIN 
+          "order" ON customer.customer_id = "order".customer_id
+        INNER JOIN 
+          order_item ON "order".order_id = order_item.order_id
+        INNER JOIN 
+          product ON order_item.product_id = product.product_id;
+      `;
+  
+      const result = await pool.query(selectQuery);
+      res.json(result.rows);
     } catch (error) {
-
+      console.error('Error fetching order details:', error);
+      res.status(500).send('Internal Server Error');
     }
-})
+  });
 
 // get particular order detail
 
 app.get('/orderDetails/:order_id', async (req, res) => {
     const { order_id } = req.params;
-
+  
     try {
-        const selectQuery = 'SELECT * FROM customer_order WHERE order_id = $1';
-        const result = await pool.query(selectQuery, [order_id]);
-
-        if (result.rows.length > 0) {
-            const order = result.rows[0];
-            res.json(order);
-        } else {
-            res.status(404).send('order detail not found');
-        }
+      const selectQuery = `
+        SELECT 
+          customer.customer_id, customer.username, customer.email, customer.phoneno, customer.address, customer.city, 
+          "order".order_id, "order".total_amount, "order".payment_method,
+          orderItem.product_id, orderItem.total_quantity, product.product_name
+        FROM 
+          customer
+        INNER JOIN 
+          "order" ON customer.customer_id = "order".customer_id
+        INNER JOIN 
+          orderItem ON "order".order_id = orderItem.order_id
+        INNER JOIN 
+          product ON orderItem.product_id = product.product_id
+        WHERE 
+          "order".order_id = $1;
+      `;
+      
+      const result = await pool.query(selectQuery, [order_id]);
+  
+      if (result.rows.length > 0) {
+        res.json(result.rows);
+      } else {
+        res.status(404).send('Order detail not found');
+      }
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
+      console.error('Error fetching order details:', error);
+      res.status(500).send('Internal Server Error');
     }
-});
+  });  
 
-app.post('/checkout', async (req, res) => {
+  app.post('/checkout', async (req, res) => {
     const {
         username,
         phoneno,
-        product_id,
+        products, // Array of product names and quantities
         total_amount,
-        total_quantity,
         email,
         address,
         city,
-        payment_method
+        zip_code
     } = req.body;
 
+    if (!username || !phoneno || !products || !total_amount || !email || !address || !city || !zip_code) {
+        return res.status(400).json({ error: 'All fields are required' });
+    }
+
     try {
-        // Function to generate unique order ID
+        function generateCustomerId() {
+            return 'CU' + Math.floor(Math.random() * 1000000);
+        }
+        const customer_id = generateCustomerId();
+
         function generateOrderId() {
-            return 'OR' + Math.floor(Math.random() * 1000000);
+            const randomNumber = Math.floor(1000 + Math.random() * 9000); // Generates a random number between 1000 and 9999
+
+            // Get current timestamp in milliseconds
+            const timestamp = new Date().getTime();
+
+            // Concatenate timestamp and random number to create unique ID
+            return 'OR' + timestamp + randomNumber;
         }
         const order_id = generateOrderId();
 
-        // Insert order details into customer_order table
-        const orderQuery = `
-            INSERT INTO customer_order (username, phoneno, order_id, product_id, total_amount, total_quantity, email, address, city, payment_method) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+        const customerQuery = `
+            INSERT INTO customer (customer_id, username, phoneno, email, address, city, zip_code) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
         `;
+        const customerValues = [customer_id, username, phoneno, email, address, city, zip_code];
+        await pool.query(customerQuery, customerValues);
 
-        const orderValues = [username, phoneno, order_id, product_id, total_amount, total_quantity, email, address, city, payment_method];
-
+        const orderQuery = `
+            INSERT INTO "order" (order_id, customer_id, total_amount) 
+            VALUES ($1, $2, $3)
+        `;
+        const orderValues = [order_id, customer_id, total_amount];
         await pool.query(orderQuery, orderValues);
 
-        // Function to generate unique shipping ID
+        const orderItemQuery = `
+            INSERT INTO order_item (customer_id, order_id, product_id, total_quantity) 
+            VALUES ($1, $2, $3, $4)
+        `;
+        for (const product of products) {
+            const productResult = await pool.query('SELECT product_id FROM product WHERE product_name = $1', [product.name]);
+            const product_id = productResult.rows[0]?.product_id;
+
+            if (!product_id) {
+                throw new Error(`Product not found: ${product.name}`);
+            }
+
+            const orderItemValues = [customer_id, order_id, product_id, product.quantity];
+            await pool.query(orderItemQuery, orderItemValues);
+        }
+
         function generateShippingId() {
             return 'SH' + Math.floor(Math.random() * 1000000);
         }
         const shipping_id = generateShippingId();
 
-        // Function to generate unique tracking number
         function generateTrackingNumber() {
             return 'TR' + Math.floor(Math.random() * 1000000);
         }
         const tracking_number = generateTrackingNumber();
 
-        // Function to generate shipment and delivery dates
         function generateShipmentAndDeliveryDates() {
             const currentDate = new Date();
 
-            // Create shipment date: 2 days from the current date
             const shipmentDate = new Date(currentDate);
             shipmentDate.setDate(shipmentDate.getDate() + 2);
 
-            // Create delivery date: 7 days from the current date
             const deliveryDate = new Date(currentDate);
             deliveryDate.setDate(deliveryDate.getDate() + 7);
 
             const formatDate = (date) => {
                 const year = date.getFullYear();
-                const month = String(date.getMonth() + 1);
-                const day = String(date.getDate());
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
                 return `${year}-${month}-${day}`;
             };
 
@@ -284,16 +341,13 @@ app.post('/checkout', async (req, res) => {
 
         const { shipment_date, delivery_date } = generateShipmentAndDeliveryDates();
 
-        // Insert shipment details into shipment table
         const shipmentQuery = `
             INSERT INTO shipment (shipping_id, order_id, shipping_address, shipment_date, delivery_date, tracking_number) 
             VALUES ($1, $2, $3, $4, $5, $6)
         `;
-
         const shipmentValues = [shipping_id, order_id, address, shipment_date, delivery_date, tracking_number];
         await pool.query(shipmentQuery, shipmentValues);
 
-        // Fetch and return the shipment details to the customer
         const shipmentDetailsQuery = 'SELECT * FROM shipment WHERE order_id = $1';
         const shipmentDetailsResult = await pool.query(shipmentDetailsQuery, [order_id]);
 

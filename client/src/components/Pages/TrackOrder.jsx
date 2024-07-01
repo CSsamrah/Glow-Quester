@@ -13,9 +13,6 @@ export default function TrackOrder() {
       return;
     }
 
-    // Track order logic goes here
-    // Example: You can make an API call to track the order based on the tracking number
-    // For simplicity, I'll just set the tracking result to a dummy message
     setTrackingResult(`Tracking result for ${trackingNumber}`);
   };
 

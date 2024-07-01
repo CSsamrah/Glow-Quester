@@ -1,67 +1,111 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import './OrderSummary.css'; // Import the CSS file for styling
+import './OrderSummary.css';
 
 const OrderSummary = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { orderDetails } = location.state || {};
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { orderDetails } = location.state || {};
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [shipmentDetails, setShipmentDetails] = useState(null);
 
-  if (!orderDetails) {
-    return <p>No order details available.</p>;
-  }
+    if (!orderDetails) {
+        return <p>No order details available.</p>;
+    }
 
-  const handleConfirmOrder = () => {
-    // Logic to handle order confirmation (e.g., send to backend, update database, etc.)
-    // For demonstration, simply navigate back to the home page after confirmation
-    alert('Order confirmed successfully!');
-    navigate('/');
-  };
+    const handleConfirmOrder = async () => {
+        setLoading(true);
+        setError(null);
 
-  return (
-    <div className='body'>
-        <br></br>
-        <br></br>
-        <br></br>
-    <div className="order_summary_container">
-        <br></br>
-        <br></br>
-        <br></br>
-      <h2>Order Summary</h2>
-      <div className="order_summary_details">
-        <p><strong>Full Name:</strong> {orderDetails.fullName}</p>
-        <p><strong>Email:</strong> {orderDetails.email}</p>
-        <p><strong>Phone Number:</strong> {orderDetails.phoneNumber}</p>
-        <p><strong>Address:</strong> {orderDetails.address}</p>
-        <p><strong>City:</strong> {orderDetails.city}</p>
-        <p><strong>Zip Code:</strong> {orderDetails.zipCode}</p>
+        const payload = {
+            username: orderDetails.fullName,
+            phoneno: orderDetails.phoneNumber,
+            products: orderDetails.items.map(item => ({
+                name: item.name, // Ensure this matches the property names expected by backend
+                quantity: item.quantity,
+                productId: item.productId,
+            })),
+            total_amount: orderDetails.totalAmount,
+            email: orderDetails.email,
+            address: orderDetails.address,
+            city: orderDetails.city,
+            zip_code: orderDetails.zipCode
+        };
 
-        <h3>Items Ordered:</h3>
-        <ul>
-          {orderDetails.items.map((item) => (
-            <li key={item.title}>
-              {item.title} - Quantity: {item.quantity}
-            </li>
-          ))}
-        </ul>
-      </div>
+        try {
+            const response = await fetch('/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
 
+            if (!response.ok) {
+                throw new Error('Failed to confirm order');
+            }
+
+            const data = await response.json();
+            setShipmentDetails(data.shipment);
+            alert('Order confirmed successfully!');
+        } catch (err) {
+            console.error('Error confirming order:', err);
+            setError('An error occurred while confirming the order.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className='body'>
+            <br />
+            <br />
+            <br />
+            <div className="order_summary_container">
+                <br />
+                <br />
+                <br />
+                <h2>Order Summary</h2>
+                <div className="order_summary_details">
+                    <p><strong>Full Name:</strong> {orderDetails.fullName}</p>
+                    <p><strong>Email:</strong> {orderDetails.email}</p>
+                    <p><strong>Phone Number:</strong> {orderDetails.phoneNumber}</p>
+                    <p><strong>Address:</strong> {orderDetails.address}</p>
+                    <p><strong>City:</strong> {orderDetails.city}</p>
+                    <p><strong>Zip Code:</strong> {orderDetails.zipCode}</p>
+
+                    <h3>Items Ordered:</h3>
+                    <ul>
+                        {orderDetails.items.map((item) => (
+                            <li key={item.productId}>
+                                {item.name} - Quantity: {item.quantity}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+{/* 
       <div className="order_summary_total">
         <p><strong>Total Amount:</strong> ${orderDetails.totalAmount}</p>
-      </div>
+      </div> */}
 
-      <div className='delivery'>
-        <p>Your order will be deliverd within 5 to 7 working days</p>
-      </div>
+                <button className="confirm_order_button" onClick={handleConfirmOrder} disabled={loading}>
+                    Confirm Order
+                </button>
+                {error && <p>{error}</p>}
 
-      <button className="confirm_order_button" onClick={handleConfirmOrder}>
-        Confirm Order
-      </button>
-    </div>
-    </div>
-  );
+                {shipmentDetails && (
+                    <div className="shipment_details">
+                        <h3>Shipment Details</h3>
+                        <p><strong>Shipping ID:</strong> {shipmentDetails.shipping_id}</p>
+                        <p><strong>Shipment Date:</strong> {shipmentDetails.shipment_date}</p>
+                        <p><strong>Delivery Date:</strong> {shipmentDetails.delivery_date}</p>
+                        <p><strong>Tracking Number:</strong> {shipmentDetails.tracking_number}</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 };
 
 export default OrderSummary;
-
-

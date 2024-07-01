@@ -63,22 +63,23 @@ const OrderDetails = () => {
                     <thead>
                         <tr>
                             <th>Order ID</th>
-                            <th>Product ID</th>
-                            <th>username</th>
+                            <th>Customer ID</th>
+                            <th>Product Name</th>
+                            <th>Username</th>
                             <th>Total Amount</th>
                             <th>Total Quantity</th>
                             <th>Email</th>
-                            <th>Phoneno</th>
+                            <th>Phone No</th>
                             <th>Address</th>
                             <th>City</th>
-                            <th>Payment Method</th>
                         </tr>
                     </thead>
                     <tbody>
                         {orders.map(order => (
                             <tr key={order.order_id}>
                                 <td>{order.order_id}</td>
-                                <td>{order.product_id}</td>
+                                <td>{order.customer_id}</td>
+                                <td>{order.product_name}</td>
                                 <td>{order.username}</td>
                                 <td>{order.total_amount}</td>
                                 <td>{order.total_quantity}</td>
@@ -86,7 +87,6 @@ const OrderDetails = () => {
                                 <td>{order.phoneno}</td>
                                 <td>{order.address}</td>
                                 <td>{order.city}</td>
-                                <td>{order.payment_method}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -98,16 +98,15 @@ const OrderDetails = () => {
                 <div className="selected-order-details">
                     <h4>Selected Order Details</h4>
                     <p>Order ID: {selectedOrder.order_id}</p>
-                    <p>UserName: {selectedOrder.username}</p>
-                    <p>Product ID: {selectedOrder.product_id}</p>
-                    <p>Total_quantity: {selectedOrder.total_quantity}</p>
-                    <p>Total_amount: {selectedOrder.total_amount}</p>
+                    <p>Customer ID: {selectedOrder.customer_id}</p>
+                    <p>Product Name: {selectedOrder.product_name}</p>
+                    <p>Username: {selectedOrder.username}</p>
+                    <p>Total Amount: {selectedOrder.total_amount}</p>
+                    <p>Total Quantity: {selectedOrder.total_quantity}</p>
                     <p>Email: {selectedOrder.email}</p>
                     <p>Phone No: {selectedOrder.phoneno}</p>
-                    <p>City: {selectedOrder.city}</p>
                     <p>Address: {selectedOrder.address}</p>
-                    <p>Payment Method: {selectedOrder.payment_method}</p>
-                   
+                    <p>City: {selectedOrder.city}</p>
                 </div>
             )}
         </div>
