@@ -180,9 +180,8 @@ export default function PrimarySearchAppBar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
+            <MenuItem onClick={handleMenuClose} component={Link} to="/sign-up">Sign Up</MenuItem>
+            <MenuItem onClick={handleMenuClose} component={Link} to="/sign-in">Log In</MenuItem>
         </Menu>
     );
 

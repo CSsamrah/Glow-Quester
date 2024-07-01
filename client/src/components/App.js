@@ -22,13 +22,14 @@ import AboutUs from './Pages/AboutUs';
 import Faqs from './Pages/Faqs';
 import Location from './Pages/Location';
 import ShippingAndReturn from './Pages/ShippingAndReturn';
-import SignUp from './Pages/SignUp';
 import Catalog from './Pages/Catalog';
 import Cart from './Pages/Cart';
-import { CartProvider } from './Pages/CartContext'; // Adjust path as per your project structure
+import { CartProvider } from './Pages/CartContext'; 
 import CheckoutForm from './Pages/CheckoutForm';
 import Admin from './Pages/AdminPage';
 import OrderSummary from './Pages/OrderSummary';
+import SignUpPage from './Pages/SignUpPage';
+import SignInPage from './Pages/SignIn';
 
 function App() {
   const location = useLocation();
@@ -54,7 +55,8 @@ function App() {
             <Route path="/faq-s" element={<Faqs />} />
             <Route path="/loc-ation" element={<Location />} />
             <Route path="/shipping-return" element={<ShippingAndReturn />} />
-            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/sign-up" element={<SignUpPage />} />
+            <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<CheckoutForm />} />

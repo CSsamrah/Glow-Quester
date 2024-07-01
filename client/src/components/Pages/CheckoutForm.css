@@ -1,7 +1,14 @@
 /* CheckoutForm.css */
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
 .checkout_form_container {
-    max-width: 400px;
+     max-width: 400px; 
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -27,9 +34,8 @@
   
   .checkout_form_container input,
   .checkout_form_container select {
+    width: 375px;
     padding: 10px;
-    width: 370px;
-    height: 20px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;

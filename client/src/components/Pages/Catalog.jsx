@@ -34,13 +34,13 @@ const Catalog = () => {
       image: img1
     },
     {
-      title: 'Product 2',
-      price: '2000',
+      title: 'Glow Recipe: Blueberry Bounce Gentle Cleanser',
+      price: '2200',
       image: img2
     },
     {
-      title: 'Product 3',
-      price: '3000',
+      title: 'Anua: Heartleaf Pore Control Cleansing Oil',
+      price: '2800',
       image: img3
     },
     {
@@ -124,7 +124,7 @@ const Catalog = () => {
                   <p>{product.title}</p>
                 </div>
                 <div className="price">
-                  <b>{product.price}</b>
+                  <b>Rs.{product.price}</b>
                 </div>
                 <div className="button">
                   <button

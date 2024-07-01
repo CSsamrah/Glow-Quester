@@ -1,6 +1,8 @@
 import React from 'react';
 import { useCart } from './CartContext'; // Adjust path as per your project structure
 import './SlidingCart.css'; // Assuming you'll have separate styles for sliding cart
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const SlidingCart = ({ isOpen, onClose, onViewFullCart }) => {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
@@ -14,25 +16,21 @@ const SlidingCart = ({ isOpen, onClose, onViewFullCart }) => {
   };
 
   return (
-    <div className='body'>
     <div className={`sliding_cart ${isOpen ? 'open' : ''}`}>
-    <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
       <div className="sliding_cart_header">
-        <h2>Sliding Cart</h2>
+        <h2>Cart</h2>
         <button className="close_sliding_cart" onClick={onClose}>
-          Close
+          <FontAwesomeIcon icon={faTimes} />
         </button>
       </div>
       <div className="sliding_cart_items">
         {cartItems.map((item) => (
           <div className="sliding_cart_item" key={item.title}>
             <div className="sliding_cart_item_title">{item.title}</div>
-            <div className="sliding_cart_item_price">{item.price}</div>
+            <div className="sliding_cart_item_price"><p>Rs.{item.price}</p></div>
             <input
               type="number"
+              min={1}
               value={item.quantity}
               className="sliding_cart_item_quantity"
               onChange={(e) =>
@@ -43,21 +41,18 @@ const SlidingCart = ({ isOpen, onClose, onViewFullCart }) => {
               className="sliding_cart_remove"
               onClick={() => removeCartItem(item.title)}
             >
-              Remove
+              <FontAwesomeIcon icon={faTrash} />
             </button>
           </div>
         ))}
       </div>
       <div className="sliding_cart_footer">
         <button className="view_full_cart_button" onClick={onViewFullCart}>
-          View Full Cart
+          View full cart
         </button>
       </div>
-    </div>
     </div>
   );
 };
 
 export default SlidingCart;
-
-
