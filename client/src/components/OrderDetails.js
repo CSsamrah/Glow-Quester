@@ -36,7 +36,7 @@ const OrderDetails = () => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            setSelectedOrder(data);
+            setSelectedOrder(data.length > 0 ? data[0] : null);
         } catch (error) {
             console.error('Error fetching order:', error);
         }
@@ -58,39 +58,41 @@ const OrderDetails = () => {
             </div>
 
             {/* Order Table */}
-            <div className="order-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Customer ID</th>
-                            <th>Product Name</th>
-                            <th>Username</th>
-                            <th>Total Amount</th>
-                            <th>Total Quantity</th>
-                            <th>Email</th>
-                            <th>Phone No</th>
-                            <th>Address</th>
-                            <th>City</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {orders.map(order => (
-                            <tr key={order.order_id}>
-                                <td>{order.order_id}</td>
-                                <td>{order.customer_id}</td>
-                                <td>{order.product_name}</td>
-                                <td>{order.username}</td>
-                                <td>{order.total_amount}</td>
-                                <td>{order.total_quantity}</td>
-                                <td>{order.email}</td>
-                                <td>{order.phoneno}</td>
-                                <td>{order.address}</td>
-                                <td>{order.city}</td>
+            <div className="table-wrapper">
+                <div className="order-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer ID</th>
+                                <th>Product Name</th>
+                                <th>Username</th>
+                                <th>Total Amount</th>
+                                <th>Total Quantity</th>
+                                <th>Email</th>
+                                <th>Phone No</th>
+                                <th>Address</th>
+                                <th>City</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {orders.map(order => (
+                                <tr key={order.order_id}>
+                                    <td>{order.order_id}</td>
+                                    <td>{order.customer_id}</td>
+                                    <td>{order.product_name}</td>
+                                    <td>{order.username}</td>
+                                    <td>{order.total_amount}</td>
+                                    <td>{order.total_quantity}</td>
+                                    <td>{order.email}</td>
+                                    <td>{order.phoneno}</td>
+                                    <td>{order.address}</td>
+                                    <td>{order.city}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             {/* Selected Order Details */}

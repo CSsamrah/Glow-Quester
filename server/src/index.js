@@ -4,6 +4,7 @@ const multer = require('multer');
 const cors = require("cors")
 const pool = require('./db')
 const bcrypt = require('bcryptjs');
+const { v4: uuidv4 } = require('uuid');
 
 
 
@@ -217,16 +218,16 @@ app.get('/orderDetails/:order_id', async (req, res) => {
       const selectQuery = `
         SELECT 
           customer.customer_id, customer.username, customer.email, customer.phoneno, customer.address, customer.city, 
-          "order".order_id, "order".total_amount, "order".payment_method,
-          orderItem.product_id, orderItem.total_quantity, product.product_name
+          "order".order_id, "order".total_amount,
+          order_item.product_id, order_item.total_quantity, product.product_name
         FROM 
           customer
         INNER JOIN 
           "order" ON customer.customer_id = "order".customer_id
         INNER JOIN 
-          orderItem ON "order".order_id = orderItem.order_id
+          order_item ON "order".order_id = order_item.order_id
         INNER JOIN 
-          product ON orderItem.product_id = product.product_id
+          product ON order_item.product_id = product.product_id
         WHERE 
           "order".order_id = $1;
       `;
@@ -266,23 +267,22 @@ app.get('/orderDetails/:order_id', async (req, res) => {
         }
         const customer_id = generateCustomerId();
 
-        function generateOrderId() {
-            const randomNumber = Math.floor(1000 + Math.random() * 9000); // Generates a random number between 1000 and 9999
-
-            // Get current timestamp in milliseconds
-            const timestamp = new Date().getTime();
-
-            // Concatenate timestamp and random number to create unique ID
-            return 'OR' + timestamp + randomNumber;
-        }
-        const order_id = generateOrderId();
-
         const customerQuery = `
             INSERT INTO customer (customer_id, username, phoneno, email, address, city, zip_code) 
             VALUES ($1, $2, $3, $4, $5, $6, $7)
         `;
         const customerValues = [customer_id, username, phoneno, email, address, city, zip_code];
+
         await pool.query(customerQuery, customerValues);
+
+        function generateOrderId() {
+            return 'OI' + Math.floor(Math.random() * 10000000);
+        }
+
+        const order_id = generateOrderId();
+
+        
+        console.log('Generated Order ID:', order_id); // Debugging log
 
         const orderQuery = `
             INSERT INTO "order" (order_id, customer_id, total_amount) 
@@ -291,9 +291,15 @@ app.get('/orderDetails/:order_id', async (req, res) => {
         const orderValues = [order_id, customer_id, total_amount];
         await pool.query(orderQuery, orderValues);
 
+        function generateItemId() {
+            return 'II' + Math.floor(Math.random() * 100000);
+        }
+
+        const item_id = generateItemId();
+
         const orderItemQuery = `
-            INSERT INTO order_item (customer_id, order_id, product_id, total_quantity) 
-            VALUES ($1, $2, $3, $4)
+            INSERT INTO order_item (customer_id, order_id, product_id, total_quantity,item_id) 
+            VALUES ($1, $2, $3, $4 ,$5)
         `;
         for (const product of products) {
             const productResult = await pool.query('SELECT product_id FROM product WHERE product_name = $1', [product.name]);
@@ -303,7 +309,7 @@ app.get('/orderDetails/:order_id', async (req, res) => {
                 throw new Error(`Product not found: ${product.name}`);
             }
 
-            const orderItemValues = [customer_id, order_id, product_id, product.quantity];
+            const orderItemValues = [customer_id, order_id, product_id, product.quantity,item_id];
             await pool.query(orderItemQuery, orderItemValues);
         }
 

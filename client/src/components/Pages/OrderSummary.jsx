@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './OrderSummary.css';
+import { v4 as uuidv4 } from 'uuid'; // Import UUID package
 
 const OrderSummary = () => {
     const location = useLocation();
@@ -10,6 +11,12 @@ const OrderSummary = () => {
     const [error, setError] = useState(null);
     const [shipmentDetails, setShipmentDetails] = useState(null);
 
+    // function generateOrderId() {
+    //     const timestamp = new Date().getTime(); // Current timestamp in milliseconds
+    //     const uuid = uuidv4(); // Generate a unique UUID
+    //     return 'OR' + timestamp + '-' + uuid; // Combine timestamp and UUID to ensure uniqueness
+    // }
+
     if (!orderDetails) {
         return <p>No order details available.</p>;
     }
@@ -18,6 +25,7 @@ const OrderSummary = () => {
         setLoading(true);
         setError(null);
 
+        // const order_id = generateOrderId();
         const payload = {
             username: orderDetails.fullName,
             phoneno: orderDetails.phoneNumber,
@@ -30,7 +38,8 @@ const OrderSummary = () => {
             email: orderDetails.email,
             address: orderDetails.address,
             city: orderDetails.city,
-            zip_code: orderDetails.zipCode
+            zip_code: orderDetails.zipCode,
+            // order_id: order_id
         };
 
         try {
