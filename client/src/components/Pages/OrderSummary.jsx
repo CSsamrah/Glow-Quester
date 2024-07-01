@@ -50,6 +50,10 @@ const OrderSummary = () => {
         <p><strong>Total Amount:</strong> ${orderDetails.totalAmount}</p>
       </div>
 
+      <div className='delivery'>
+        <p>Your order will be deliverd within 5 to 7 working days</p>
+      </div>
+
       <button className="confirm_order_button" onClick={handleConfirmOrder}>
         Confirm Order
       </button>

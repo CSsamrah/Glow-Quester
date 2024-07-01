@@ -14,7 +14,12 @@ const SlidingCart = ({ isOpen, onClose, onViewFullCart }) => {
   };
 
   return (
+    <div className='body'>
     <div className={`sliding_cart ${isOpen ? 'open' : ''}`}>
+    <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <div className="sliding_cart_header">
         <h2>Sliding Cart</h2>
         <button className="close_sliding_cart" onClick={onClose}>
@@ -48,6 +53,7 @@ const SlidingCart = ({ isOpen, onClose, onViewFullCart }) => {
           View Full Cart
         </button>
       </div>
+    </div>
     </div>
   );
 };

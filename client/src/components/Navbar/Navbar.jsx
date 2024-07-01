@@ -29,6 +29,9 @@ import {
 } from '@mui/icons-material';
 import { styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import Cart from '../Pages/Cart';
+
+// Assuming 'Cart' component is imported and defined somewhere in your project
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -200,7 +203,7 @@ export default function PrimarySearchAppBar() {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem>
+            <MenuItem component={Link} to="/cart">
                 <IconButton aria-label="cart">
                     <Badge badgeContent={4} color="secondary">
                         <ShoppingCartIcon />
@@ -289,7 +292,7 @@ export default function PrimarySearchAppBar() {
                                 Glow Quester
                             </Typography>
                         </Box>
-                        <Search>
+                        {/* <Search>
                             <SearchIconWrapper>
                                 <SearchIcon />
                             </SearchIconWrapper>
@@ -297,13 +300,15 @@ export default function PrimarySearchAppBar() {
                                 placeholder="Search…"
                                 inputProps={{ 'aria-label': 'search' }}
                             />
-                        </Search>
+                        </Search> */}
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <IconButton aria-label="cart">
-                                <Badge badgeContent={4} color="secondary">
-                                    <ShoppingCartIcon />
-                                </Badge>
-                            </IconButton>
+                            <Link to="/cart" style={{ textDecoration: 'none' }}>
+                                <IconButton aria-label="cart">
+                                    <Badge badgeContent={4} color="secondary">
+                                        <ShoppingCartIcon />
+                                    </Badge>
+                                </IconButton>
+                            </Link>
                             <IconButton
                                 size="large"
                                 edge="end"
@@ -337,6 +342,7 @@ export default function PrimarySearchAppBar() {
         </ThemeProvider>
     );
 }
+
 
 
 
