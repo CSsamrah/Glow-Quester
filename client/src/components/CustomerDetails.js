@@ -26,15 +26,21 @@ export default function CustomerDetails() {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Zip Code</th>
                     </tr>
                 </thead>
                 <tbody>
                     {customers.map((customer) => (
-                        <tr key={customer.user_id}>
-                            <td>{customer.user_id}</td>
+                        <tr key={customer.customer_id}>
+                            <td>{customer.customer_id}</td>
                             <td>{customer.username}</td>
                             <td>{customer.email}</td>
                             <td>{customer.phoneno}</td>
+                            <td>{customer.address}</td>
+                            <td>{customer.city}</td>
+                            <td>{customer.zip_code}</td>
                         </tr>
                     ))}
                 </tbody>

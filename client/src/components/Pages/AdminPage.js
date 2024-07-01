@@ -42,7 +42,7 @@ export default function Admin() {
     return (
         <div className="admin-container">
             <h3 className="i_name">Dashboard</h3>
-            <button onClick={handleShowCustomers}>Registered Customers</button>
+            <button onClick={handleShowCustomers}>Customers</button>
             <button onClick={handleShowProducts}>Product Details</button>
             <button onClick={handleShowOrders}>Order Details</button>
             <button onClick={handleShowShipments}>Shipment Details</button> {/* New button for Shipment Details */}
