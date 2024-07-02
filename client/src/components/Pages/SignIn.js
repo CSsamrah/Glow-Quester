@@ -74,7 +74,7 @@ const SignInPage = () => {
         <br />
         <button type="submit"  className="btn btn-primary">Sign in</button>
         <br />
-        <Link cclassName="signup" to="/sign-up" style={{ fontSize: '1rem' }}>New around here? Sign up</Link>
+        <Link className="signup" to="/sign-up" style={{ fontSize: '1rem' }}>New around here? Sign up</Link>
       </form>
     </div>
   );
