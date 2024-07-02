@@ -52,7 +52,7 @@ const RegisteredCustomers = () => {
             <div className="search-customer">
                 <input
                     type="text"
-                    placeholder="Enter Customer ID"
+                    placeholder="Enter user ID"
                     value={searchCustomerID}
                     onChange={(e) => setSearchCustomerID(e.target.value)}
                 />
