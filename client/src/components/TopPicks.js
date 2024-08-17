@@ -7,8 +7,10 @@ import cleansing_cream from './images/cleansing cream.png'
 import kylie from './images/kylie skin.png'
 import gel_cream from './images/gel cream.png'
 import vitamin_C from './images/vitamin c.png'
+import { useNavigate } from 'react-router-dom'
 
 export default function TopPicks() {
+    const navigate = useNavigate();
   return (
     <div className='topPicks'>
     <div>

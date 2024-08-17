@@ -55,7 +55,9 @@ const determineSkincareRoutine = (userAnswers) => {
     };
 
     userAnswers.slice(0, 3).forEach(answer => {
-        typeCount[answer.type]++;
+        if (answer) {
+            typeCount[answer.type]++;
+        }
     });
 
     let predominantType = Object.keys(typeCount).reduce((a, b) => typeCount[a] > typeCount[b] ? a : b);
@@ -164,18 +166,3 @@ function Quiz() {
 }
 
 export default Quiz;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
