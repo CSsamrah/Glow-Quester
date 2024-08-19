@@ -13,7 +13,7 @@ const ShipmentDetails = () => {
 
     const fetchShipments = async () => {
         try {
-            const response = await fetch('/shipment');
+            const response = await fetch('https://glowquester-backend.vercel.app/skincare/shipment');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -27,7 +27,7 @@ const ShipmentDetails = () => {
     // Fetch shipment by shipping_id
     const searchShipment = async () => {
         try {
-            const response = await fetch(`/shipment/${searchShippingID}`);
+            const response = await fetch(`https://glowquester-backend.vercel.app/skincare/shipment/${searchShippingID}`);
             if (response.status === 404) {
                 setSelectedShipment(null);
                 throw new Error('Shipment not found');

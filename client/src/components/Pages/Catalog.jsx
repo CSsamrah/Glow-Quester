@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from './CartContext'; // Adjust path as per your project structure
+import { useCart } from './CartContext'; 
 import './Catalog.css';
 import SlidingCart from './SlidingCart'; // Import SlidingCart component
 

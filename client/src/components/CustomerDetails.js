@@ -5,7 +5,7 @@ export default function CustomerDetails() {
 
     const fetchCustomers = async () => {
         try {
-            const response = await fetch('/customers');
+            const response = await fetch('https://glowquester-backend.vercel.app/skincare/customers');
             const data = await response.json();
             setCustomers(data);
         } catch (error) {

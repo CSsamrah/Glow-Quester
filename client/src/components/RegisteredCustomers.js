@@ -13,7 +13,7 @@ const RegisteredCustomers = () => {
 
     const fetchCustomers = async () => {
         try {
-            const response = await fetch('/registered-customers');
+            const response = await fetch('https://glowquester-backend.vercel.app/skincare/registered-customers');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -28,7 +28,7 @@ const RegisteredCustomers = () => {
     // Fetch customer by customer_id
     const searchCustomer = async () => {
         try {
-            const response = await fetch(`/registered-customers/${searchCustomerID}`);
+            const response = await fetch(`https://glowquester-backend.vercel.app/skincare/registered-customers/${searchCustomerID}`);
             if (response.status === 404) {
                 setSelectedCustomer(null);
                 throw new Error('Customer not found');

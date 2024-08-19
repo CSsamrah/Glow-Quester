@@ -16,7 +16,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`/product/${product_id}`);
+        const response = await fetch(`https://glowquester-backend.vercel.app/product/${product_id}`);
         if (!response.ok) {
           throw new Error('Product not found');
         }

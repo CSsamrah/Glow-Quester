@@ -30,7 +30,7 @@ const OrderSummary = () => {
             username: orderDetails.fullName,
             phoneno: orderDetails.phoneNumber,
             products: orderDetails.items.map(item => ({
-                name: item.name, // Ensure this matches the property names expected by backend
+                name: item.name, 
                 quantity: item.quantity,
                 productId: item.productId,
             })),
@@ -43,7 +43,7 @@ const OrderSummary = () => {
         };
 
         try {
-            const response = await fetch('/checkout', {
+            const response = await fetch('https://glowquester-backend.vercel.app/skincare/checkout', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
