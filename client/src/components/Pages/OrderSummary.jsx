@@ -93,10 +93,10 @@ const OrderSummary = () => {
                         ))}
                     </ul>
                 </div>
-
-                <div className="order_summary_total">
-                    <p><strong>Total Amount:</strong> ${orderDetails.totalAmount}</p>
-                </div>
+{/* 
+      <div className="order_summary_total">
+        <p><strong>Total Amount:</strong> ${orderDetails.totalAmount}</p>
+      </div> */}
 
                 <button className="confirm_order_button" onClick={handleConfirmOrder} disabled={loading}>
                     Confirm Order
