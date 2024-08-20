@@ -23,11 +23,11 @@ const Sunscreen = () => {
 
 
   const products = [
-    { id:'p12',
-      title: 'MISSHA Soft Finish Sun Milk',
-      price: '1700',
-      image: img1
-    },
+    // { id:'p12',
+    //   title: 'MISSHA Soft Finish Sun Milk',
+    //   price: '1700',
+    //   image: img1
+    // },
     {id:'p13',
       title: 'SALT & SOFT: Natural Mineral Sunscreen Lotion',
       price: '2000',

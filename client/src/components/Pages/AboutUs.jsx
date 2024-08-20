@@ -15,7 +15,7 @@ export default function AboutUs(){
         <img src={image5} alt='Glow' className='full-width-image'></img>
       </div>
       <br></br>
-      <p> Founded by Colette Laxton and Mark Curry in 2018, 
+      <p> Founded by Samrah , Areesha and Haiqa 
         The Glow Quester was born from a belief that better knowledge powers better decisions. We know that skincare, can be confusing. 
         But we also know that you want to understand more about your skin so you can make the right decisions.</p>
         <br></br><br></br>

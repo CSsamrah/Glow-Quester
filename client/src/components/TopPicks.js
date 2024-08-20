@@ -8,6 +8,8 @@ import kylie from './images/kylie skin.png'
 import gel_cream from './images/gel cream.png'
 import vitamin_C from './images/vitamin c.png'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
 
 export default function TopPicks() {
     const navigate = useNavigate();
@@ -44,7 +46,9 @@ export default function TopPicks() {
         </div>
 
     </div>
+    <Link to="/catalog">
     <button className='mainbutton'>Shop More </button>
+    </Link>
     </div>
   )
 }

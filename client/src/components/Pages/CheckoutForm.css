@@ -8,7 +8,7 @@ body {
 }
 
 .checkout_form_container {
-     max-width: 400px; 
+    max-width: 400px; 
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -34,7 +34,7 @@ body {
   
   .checkout_form_container input,
   .checkout_form_container select {
-    width: 375px;
+    width:23em ;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -74,4 +74,13 @@ body {
   .checkout_form_container button[type="button"]:hover {
     background-color: #da190b;
   }
-  
+
+  @media screen and (max-width:768px) {
+    .checkout_form_container {
+      width:73vw;
+    
+  }
+  .checkout_form_container input,
+  .checkout_form_container select {
+    width: 15rem;
+  }}

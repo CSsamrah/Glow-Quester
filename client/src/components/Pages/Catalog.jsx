@@ -94,12 +94,12 @@ const Catalog = () => {
       price: '2500',
       image: img11
     },
-    {
-      id: 'p12',
-      title: 'MISSHA Soft Finish Sun Milk',
-      price: '1700',
-      image: img12
-    },
+    // {
+    //   id: 'p12',
+    //   title: 'MISSHA Soft Finish Sun Milk',
+    //   price: '1700',
+    //   image: img12
+    // },
     {
       id: 'p13',
       title: 'SALT & SOFT: Natural Mineral Sunscreen Lotion',

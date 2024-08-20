@@ -100,6 +100,7 @@ function NavTabs() {
                 onChange={handleChange}
                 aria-label="nav tabs example"
                 role="navigation"
+                sx={{ display: { xs: 'none', md: 'flex' } }}
             >
                 <LinkTab label="Home" to="/" sx={{ fontWeight: '800', fontFamily: 'Inter' }} />
                 <LinkTab label="Quiz" to="/skintest" sx={{ fontWeight: '800', fontFamily: 'Inter' }} />
@@ -286,7 +287,13 @@ export default function PrimarySearchAppBar() {
                                 variant="h4"
                                 noWrap
                                 component="div"
-                                sx={{ display: { xs: 'none', sm: 'block' }, fontWeight: '600', color: 'white' }}
+                                sx={{
+                                    display: 'flex',
+                                    fontWeight: '600',
+                                    color: 'white',
+                                    flexGrow: 1,
+                                    justifyContent: { xs: 'center', md: 'flex-start' },
+                                }}
                             >
                                 Glow Quester
                             </Typography>

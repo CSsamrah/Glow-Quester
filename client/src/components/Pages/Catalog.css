@@ -253,7 +253,7 @@
   
   .cart_box {
     display: grid;
-    grid-template-columns: 32% 50% 18%;
+    grid-template-columns: 40% 30% 25%;
     align-items: center;
     gap: 10px;
     margin-top: 20px;
@@ -272,7 +272,7 @@
   }
   
   .cart_product_title {
-    font-size: 14px;
+    font-size: 1rem;
     text-transform: uppercase;
   }
   
