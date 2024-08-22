@@ -77,13 +77,14 @@ const OrderSummary = () => {
                 <br />
                 <h2>Order Summary</h2>
                 <div className="order_summary_details">
-                    <p><strong>Full Name:</strong> {orderDetails.fullName}</p>
-                    <p><strong>Email:</strong> {orderDetails.email}</p>
-                    <p><strong>Phone Number:</strong> {orderDetails.phoneNumber}</p>
-                    <p><strong>Address:</strong> {orderDetails.address}</p>
-                    <p><strong>City:</strong> {orderDetails.city}</p>
-                    <p><strong>Zip Code:</strong> {orderDetails.zipCode}</p>
-
+                    <ul>
+                    <li><strong>Full Name:</strong> {orderDetails.fullName}</li>
+                    <li><strong>Email:</strong> {orderDetails.email}</li>
+                    <li><strong>Phone Number:</strong> {orderDetails.phoneNumber}</li>
+                    <li><strong>Address:</strong> {orderDetails.address}</li>
+                    <li><strong>City:</strong> {orderDetails.city}</li>
+                    <li><strong>Zip Code:</strong> {orderDetails.zipCode}</li>
+                    </ul>
                     <h3>Items Ordered:</h3>
                     <ul>
                         {orderDetails.items.map((item) => (
@@ -106,10 +107,12 @@ const OrderSummary = () => {
                 {shipmentDetails && (
                     <div className="shipment_details">
                         <h3>Shipment Details</h3>
-                        <p><strong>Shipping ID:</strong> {shipmentDetails.shipping_id}</p>
-                        <p><strong>Shipment Date:</strong> {shipmentDetails.shipment_date}</p>
-                        <p><strong>Delivery Date:</strong> {shipmentDetails.delivery_date}</p>
-                        <p><strong>Tracking Number:</strong> {shipmentDetails.tracking_number}</p>
+                        <ul>
+                        <li><strong>Shipping ID:</strong> {shipmentDetails.shipping_id}</li>
+                        <li><strong>Shipment Date:</strong> {new Date(shipmentDetails.shipment_date).toLocaleDateString()}</li>
+                        <li><strong>Delivery Date:</strong> {new Date(shipmentDetails.delivery_date).toLocaleDateString()}</li>
+                        <li><strong>Tracking Number:</strong> {shipmentDetails.tracking_number}</li>
+                        </ul>
                     </div>
                 )}
             </div>
