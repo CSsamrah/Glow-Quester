@@ -31,7 +31,7 @@ const SignInPage = () => {
       if (response.status === 200) {
         setSuccess(data);
         setError('');
-        navigate('/');
+        navigate('/admin');
       } else {
         setError(data);
         setSuccess('');
