@@ -1,11 +1,11 @@
 import React from 'react';
-import './TermsAndServices.css'
+import './Faqs.css'
 import image3 from '../images/Glow quester (1).png'
 import Footer from '../FooterEnd/FooterEnd'
 
 export default function TermsOfService() {
   return (
-    <div className='body'>
+    <div className='Faqsbody'>
         <br></br>
         <br></br>
         <br></br>

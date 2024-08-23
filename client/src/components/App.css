@@ -367,6 +367,13 @@ body, html {
     flex-direction: column;
     gap: 1em;
   }
+  .shippingBody{
+    width: 100%;
+    font-size: 1.2em;
+  }
+  .shippingBody ul{
+    margin: 0 auto;
+  }
   
   
 }

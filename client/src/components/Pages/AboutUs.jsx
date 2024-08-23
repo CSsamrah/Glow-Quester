@@ -5,7 +5,7 @@ import Footer from '../FooterEnd/FooterEnd'
 
 export default function AboutUs(){
     return(
-        <div className="body">
+        <div className="AboutusBody">
 <br></br>
         <br></br>
         <br></br>

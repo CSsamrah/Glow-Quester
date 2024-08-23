@@ -5,7 +5,7 @@ import Footer from '../FooterEnd/FooterEnd';
 
 export default function Faqs() {
     return (
-        <div className="body">
+        <div className="Faqsbody">
             <br />
             <br />
             <br />

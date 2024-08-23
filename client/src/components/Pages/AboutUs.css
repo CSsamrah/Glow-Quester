@@ -1,3 +1,15 @@
-.body{
+.AboutusBody{
     background-color: #ddabcf;
+}
+@media screen and (max-width:800px) {
+    .AboutusBody{
+        margin: 0 auto;
+        width: 100%;
+        font-size: 1.2em;
+        
+    }
+    .AboutusBody p{
+        padding: 10px;
+    }  
+    
 }

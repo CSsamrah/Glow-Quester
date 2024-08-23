@@ -1,10 +1,11 @@
 import React from "react";
 import Footer from '../FooterEnd/FooterEnd'
 import image7 from '../images/Shipping (2).png'
+import '../App.css'
 
 export default function ShippingAndReturn(){
     return(
-        <div className="body">
+        <div className="shippingBody">
         <br></br>
         <br></br>
         <br></br>

@@ -8,39 +8,57 @@
     display: block;
   }
   
-.body {
+.Faqsbody {
     background-color: #ddabcf;
-    text-align: center;
-    margin: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
     padding: 0;
     min-height: 100vh; /* Ensures the background color covers the full height of the viewport */
     box-sizing: border-box;
+    width: 100%;
   }
-.body p{
-    align-items: center;
-    text-align: left;
-    padding-left: 320px;
-    max-width: 1050px;
+.Faqsbody p{
+    padding-left: 11em;
+    max-width: 90%;
     box-sizing: border-box;
 }
-  .body h1, .body h2, .body ul {
+ .Faqsbody ul, li {
     text-align: left; /* Align headers and lists to the left if desired */
     margin: 0 auto;
-    max-width: 600px; /* Adjust the max-width as per your design */
+    width: 60vw; /* Adjust the max-width as per your design */
   }
   
-  .body h1 {
+  .Faqsbody h1 {
     font-size: 2em;
     margin-bottom: 20px;
+    text-align: center;
   }
   
-  .body h2 {
+  .Faqsbody h2,.Faqsbody h3 {
     font-size: 1.5em;
-    margin-top: 20px;
-    margin-bottom: 10px;
+   margin: 1em 0em;
+   padding-left: 7em;
+    
   }
   
-  .body ul {
+  .Faqsbody ul {
     list-style-position: inside;
     padding-left: 0;
   }
+
+  @media screen and (max-width:800px) {
+    .Faqsbody p{
+      padding-left: 2em;
+    }
+    .Faqsbody h2,.Faqsbody h3 {
+      font-size: 1.5em;
+     margin: 1em 0em;
+     padding-left: 2em;
+      
+    }
+    .Faqsbody ul {
+      margin-top: 1em;
+      width: 70vw;
+    
+  }}
