@@ -2,9 +2,9 @@ const express = require('express')
 const app = express()
 const multer = require('multer');
 const cors = require("cors")
-const pool = require('./db')
+const pool = require('../db')
 const bcrypt = require('bcryptjs');
-const { v4: uuidv4 } = require('uuid');
+
 
 
 

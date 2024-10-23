@@ -60,7 +60,7 @@ const OrderSummary = () => {
             alert('Order confirmed successfully!');
         } catch (err) {
             console.error('Error confirming order:', err);
-            setError('An error occurred while confirming the order.');
+            setError(err.message || 'An error occurred while confirming the order.');
         } finally {
             setLoading(false);
         }
